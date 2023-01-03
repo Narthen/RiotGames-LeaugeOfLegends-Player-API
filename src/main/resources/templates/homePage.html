@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="ISO-8859-1">
+<title>LoL Account Info</title>
+
+<link rel="stylesheet" href="/cssStyles/background.css">
+<link rel="stylesheet" href="/cssStyles/summonerInfo-Top.css">
+<link rel="stylesheet" href="/cssStyles/summonerChampionInfo.css">
+<link rel="stylesheet" href="/cssStyles/recentGames-Info.css">
+<link rel="stylesheet" href="/cssStyles/matchHistory-Filter.css">
+<link rel="stylesheet" href="/cssStyles/matchHistory-RecentGames.css">
+
+
+
+
+</head>
+<body>
+     <div id="backgr">
+     </div>     
+    <div>
+        <br>
+    </div>
+    <div id="textarea">
+        
+        <div id="topSection" class="container">
+            
+            <div id="lvl" class="column" >
+                <span th:text="${summoner.getAccName()}"></span> <br>
+                <img id="summonerIconImg" th:src="${summoner.getIconUrl()}" alt="Summoner Icon">
+                <br> <span th:text="${summoner.getSummonerLevel()}"></span>
+            </div>
+           
+            <div id="rankIcon" class="column" >
+                <img id="rankImg" th:src="'/rankImages/'+ ${summoner.getSoloRankTier() +'.png'}" alt="RankIcon">
+            </div>
+           
+            <div id="rank" class="column" >
+                
+                <div id="rankText">
+                  <b>
+                    <span th:text="${summoner.getSoloRankQueueType() + ':'}"></span> <br>
+                    <span th:text="${summoner.getSoloRankTier() + ' ' + summoner.getSoloRankRank()}"></span> <br>
+                    <span th:text="'LP: ' + ${summoner.getSoloRankLeaguePoints() + 'lp'}"> </span><br> <br>
+                    <span id="wins" th:text="${summoner.getSoloRankWins() + ' W'}"></span> - <span id="losses" th:text="${summoner.getSoloRankLosses() + ' L'}"></span> <br>
+                    <span id="winPer" th:text="'Win %: ' + ${summoner.getSoloRankWinRate() + '%'}"></span>
+                  </b>
+                </div>
+                
+            </div>
+            
+            <div id="flexIcon" class="column" >
+                
+                <img id="rankImg" th:src="'/rankImages/'+ ${summoner.getFlexRankTier() +'.png'}" alt="RankIcon">
+            </div>
+           
+            <div id="flex" class="column" >
+                
+                <div id="rankText">
+                  <b>
+                    <span th:text="${summoner.getFlexRankQueueType() + ':'}"></span> <br>
+                    <span th:text="${summoner.getFlexRankTier() + ' ' + summoner.getFlexRankRank()}"></span> <br>
+                    <span th:text="'LP: ' + ${summoner.getFlexRankLeaguePoints() + 'lp'}"> </span><br> <br>
+                    <span id="wins" th:text="${summoner.getFlexRankWins() + ' W'}"></span> - <span id="losses" th:text="${summoner.getFlexRankLosses() + ' L'}"></span> <br>
+                    <span id="winPer" th:text="'Win %: ' + ${summoner.getFlexRankWinRate() + '%'}"></span>
+                  </b>
+                </div>
+                
+            </div>
+            
+            <div id="searchSaveSummoner" class="column" >
+                
+                <div id="searchAndSave">
+                    <form id="getSummoner" method="get" th:action="@{/summoner}">
+					   <input type="submit" value="Search" />
+					   <input type="text" id="summonerName" placeholder=" SummonerName" size="15" style="height:20px; font-size:11pt;" required pattern=".*\S.*"/>
+						<select id="mirrorSelect" th:name="matchType"  style="display: none;">
+					      <option>All</option>
+					      <option>Blind</option>
+					      <option>Draft</option>
+					      <option>Ranked</option>
+					      <option>Flex</option>
+					      <option>ARAM</option>
+					    </select>
+					</form>
+                    <br> <br> 
+                    
+                    <span id="saveSummoner">
+                        Save Summoner Information 
+                        <form>
+                            <input type="submit" value="Save Narthen" />
+                        </form>
+                        
+                    </span>
+                    <span id="popup" th:class="${popup}"></span>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        
+        
+        <div id="champions">
+        
+            <div class="dropdown-container">
+              <!-- HTML for the dropdown button -->
+                <div id="mostPlayedChamps"> 
+                    <button class="dropdown-button" id="toggleChampionButton"> ^ </button>
+                     &nbsp; Most Played Champions: 
+                </div>
+                <!-- HTML for the dropdown content -->
+                <div class="dropdown-content" id="championContent" hidden>
+                
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="noContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>     
+        
+        
+        <div id="RecentGamesInfo">
+            <div class="dropdown-container-RecentGames" >
+                
+                <div id="mostPlayedChamps"> 
+                    <button class="dropdown-button-RecentGames" id="toggleMatchHistStatsButton"> ^ </button>
+                     &nbsp; Recent Match History Analysis: 
+                </div>
+                
+                <div class="dropdown-content-RecentGames" id="matchHistStats">
+                    <div id="recentChartInfo">
+                        Wins: 10 &nbsp;&nbsp;&nbsp;<br> Losses: 10 &nbsp;&nbsp;&nbsp
+                        <canvas id="recentGamesChart" ></canvas>   
+                        
+                    </div>
+                    <div id="recentChartInfoKDA">
+                        Win Rate: 50%   <br>
+                        KDA: 1-1-1
+                        
+                    </div>
+                    
+                    <div id="recentNumGamesTitle">Games: </div>
+                    <div id="recentGameType">
+                      <div id="recentNumGamesBorder"> <div id="recentNumGames">5</div> - Blind Pick         </div>      <br> 
+                      <div id="recentNumGamesBorder"> <div id="recentNumGames">0</div> - Draft Pick         </div>      <br>
+                      <div id="recentNumGamesBorder"> <div id="recentNumGames">5</div> - Ranked Solo/Duo    </div>      <br>
+                        
+                    </div>
+                     <div id="recentGameType">
+                      <div id="recentNumGamesBorder"> <div id="recentNumGames">0</div> - Ranked Flex        </div>      <br>
+                      <div id="recentNumGamesBorder"> <div id="recentNumGames">5</div> - ARAM               </div>      <br>
+                      <div id="recentNumGamesBorder"> <div id="recentNumGames">0</div> - Featured Gamemode  </div>      <br>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div id="matchHistoryFilter">
+            <div>
+            	<form id="changeMatchType" method="get" th:action="@{/summoner/__${summoner.getAccName()}__}">
+	                <select id="matchHistSelect" th:name="matchType">
+	                  <option value="All">All</option>
+	                  <option value="Blind">Blind</option>
+	                  <option value="Draft">Draft</option>
+	                  <option value="Ranked">Ranked</option>
+	                  <option value="Flex">Flex</option>
+	                  <option value="ARAM">ARAM</option>
+	                </select>
+	        	</form>
+            </div>
+            <div id="dropdown-button-Controller-Div">
+                <button class="dropdown-button-Controller-Collapse"> Collapse </button>
+                <button class="dropdown-button-Controller-Expand"> Expand </button>
+            </div>
+            
+        </div>
+        
+        <div id="matchHistory">
+            
+            
+            
+            <div class="dropdown-container-matchHistorygame" th:each="match : ${summoner.getMatchHistory()}">
+            
+                <div class="matchHistorygame-ButtonDivClass" id="matchHistorygame-ButtonDiv"> 
+                    <button class="dropdown-button-matchHistorygame"> ^ </button>
+                     &nbsp; [[${match.getQueueName()}]] &nbsp; - &nbsp; [[${match.getGameEndTimestamp()}]] &nbsp;&nbsp; [[${match.getWinLoss()}]]
+                </div>
+               
+                <div class="dropdown-content-matchHistorygame" hidden>
+                    <div id="matchHistorygame-Summoner">
+                        [[${match.getSummonerAccName()}]] 
+                        <img id="matchHistorygameSummonerChampionImage" th:src="${match.getSummonerChampionUrl()}"> 
+                        [[${match.getSummonerChampionName()}]]
+                        
+                    </div>
+                    <div id="matchHistorygame-SummonerStats">
+                        <div>[[${match.getSummonerKills()}]]-[[${match.getSummonerDeaths()}]]-[[${match.getSummonerAssists()}]]</div>
+                        <div>[[${match.getSummonerKda()}]] KDA</div> 
+                        <div>[[${match.getSummonerTotalMinionsKilled()}]] CS</div>
+                        
+                    </div>
+                    
+                    
+                    <div id="matchHistorygame-PlayersInGame">
+                      
+                      
+                        <div id="matchHistorygame-PlayersInGame-Team1">
+                          <span th:each="participant : ${match.getParticipants()}" th:if="${participant.getMapSide() == '100'}">
+                            <img id="matchHistorygameChampionImage" th:src="${participant.getChampionUrl()}"> 
+                             [[${participant.getAccName()}]]  <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; [[${participant.getKills()}]]-[[${participant.getDeaths()}]]-[[${participant.getAssists()}]] &nbsp; [[${participant.getTotalMinionsKilled()}]] CS &nbsp; [[${participant.getGoldEarned()}]]k-g</span> <br>
+                          </span>
+                        </div>
+                        
+                        
+                        <div id="matchHistorygame-PlayersInGame-Team2">
+                           <span th:each="participant : ${match.getParticipants()}" th:if="${participant.getMapSide() == '200'}">
+                            <img id="matchHistorygameChampionImage" th:src="${participant.getChampionUrl()}"> 
+                             [[${participant.getAccName()}]]  <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; [[${participant.getKills()}]]-[[${participant.getDeaths()}]]-[[${participant.getAssists()}]] &nbsp; [[${participant.getTotalMinionsKilled()}]] CS &nbsp; [[${participant.getGoldEarned()}]]k-g</span> <br>
+                          </span>
+                        </div>
+                        
+                        
+                      
+                    </div>
+                </div>
+            </div>
+            
+            
+           <div id="loadMoreGames">
+           		<form id="loadMoreGamesForm" method="get" th:action="@{/summoner/__${summoner.getAccName()}__}">
+            		<input type="hidden" th:name="loadMore" value="Load More Games" />
+            		<select id="mirrorSelect" th:name="matchType"  style="display: none;">
+					      <option>All</option>
+					      <option>Blind</option>
+					      <option>Draft</option>
+					      <option>Ranked</option>
+					      <option>Flex</option>
+					      <option>ARAM</option>
+					    </select>
+            		Load More Games
+            	</form>
+            </div>  
+            
+        </div>
+        	<script th:inline="javascript">
+			  window.onpopstate = function(event) {
+			    window.location = [[${prevURL}]];
+			  }
+			</script>
+			<script src="/getSummonerPageURL.js"></script>
+			<script src="/mirrorSelectMatchType.js"></script>
+        	<script src="/getSummonerPageURL.js"></script>
+        	<script src="/invalidSummonerPopup.js"></script>
+        	<script src="/mostPlayedChampions.js"></script>
+      
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+            <script>
+              import doughnutlabel from "chartjs-plugin-doughnutlabel";
+              Chart.plugins.register(doughnutlabel);
+            </script>
+            <script src="/winLossChart.js"></script>
+  			
+  			<script src="/matchHistory.js"></script>
+        	<script src="/checkNameAndSubmit.js"></script>
+          	<script src="/loadMoreGames.js"></script>
+    </div>    
+    
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

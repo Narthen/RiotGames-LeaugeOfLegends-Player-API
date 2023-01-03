@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="background.css">
+<link rel="stylesheet" href="summonerInfo-Top.css">
+<link rel="stylesheet" href="summonerChampionInfo.css">
+<link rel="stylesheet" href="recentGames-Info.css">
+<link rel="stylesheet" href="matchHistory-Filter.css">
+<link rel="stylesheet" href="matchHistory-RecentGames.css">
+
+
+<title>LoL Account Info</title>
+
+</head>
+<body>
+     <div id="backgr">
+     </div>     
+    <div>
+        <br>
+    </div>
+    <div id="textarea">
+        
+        <div id="topSection" class="container">
+            
+            <div id="lvl" class="column" >
+                Narthen <br>
+                <img id="summonerIconImg" src="http://ddragon.leagueoflegends.com/cdn/12.23.1/img/profileicon/0.png" alt="Summoner Icon">
+                <br> Level
+            </div>
+           
+            <div id="rankIcon" class="column" >
+                
+                <img id="rankImg" src="https://opgg-static.akamaized.net/images/medals_new/master.png?image=q_auto,f_webp,w_144&v=1670492996940">
+            </div>
+           
+            <div id="rank" class="column" >
+                
+                <div id="rankText">
+                  <b>
+                    Solo / Duo: <br>
+                    Diamond <br>
+                    LP: 50lp <br> <br>
+                    <span id="wins">10 W </span> - <span id="losses">10 L </span> <br>
+                    <span id="winPer"> Win %: 50% </span>
+                  </b>
+                </div>
+                
+            </div>
+            
+            <div id="flexIcon" class="column" >
+                
+                <img id="rankImg" src="https://opgg-static.akamaized.net/images/medals_new/master.png?image=q_auto,f_webp,w_144&v=1670492996940">
+            </div>
+           
+            <div id="flex" class="column" >
+                
+                <div id="rankText">
+                  <b>
+                    Flex Queue: <br>
+                    Diamond <br>
+                    LP: 50lp <br> <br>
+                    <span id="wins">10 W </span> - <span id="losses">10 L </span> <br>
+                    <span id="winPer"> Win %: 50% </span>
+                  </b>
+                </div>
+                
+            </div>
+            
+            <div id="searchSaveSummoner" class="column" >
+                
+                <div id="searchAndSave">
+                    <form>
+                        <input type="submit" value="Search" />
+                        <input type="string" placeholder=" SummonerName" size="15" style="height:20px; font-size:11pt;" />
+                    </form>
+                    <br> <br> 
+                    
+                    <span id="saveSummoner">
+                        Save Summoner Information 
+                        <form>
+                            <input type="submit" value="Save Narthen" />
+                        </form>
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        
+        
+        <div id="champions">
+        
+            <div class="dropdown-container">
+              <!-- HTML for the dropdown button -->
+                <div id="mostPlayedChamps"> 
+                    <button class="dropdown-button" id="toggleChampionButton"> ^ </button>
+                     &nbsp; Most Played Champions: 
+                </div>
+                <!-- HTML for the dropdown content -->
+                <div class="dropdown-content" id="championContent" hidden>
+                
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="hasContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    <div class="championStats" id="noContent">
+                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                       <div id="championWinLoss">
+                          <div id="championName">Thresh</div>
+                          <div>50%</div>
+                          <div>10W - 10L</div>
+                        </div>
+                        
+                        <div id="championKDA">
+                          <div>2.58 KDA</div>
+                          <div>2.1-5.2-11.1</div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>     
+        
+        
+        <div id="RecentGamesInfo">
+            <div class="dropdown-container-RecentGames" >
+                
+                <div id="mostPlayedChamps"> 
+                    <button class="dropdown-button-RecentGames" id="toggleMatchHistStatsButton"> ^ </button>
+                     &nbsp; Recent Match History Analysis: 
+                </div>
+                
+                <div class="dropdown-content-RecentGames" id="matchHistStats">
+                    <div id="recentChartInfo">
+                        Wins: 10 &nbsp;&nbsp;&nbsp;<br> Losses: 10 &nbsp;&nbsp;&nbsp
+                        <canvas id="recentGamesChart" ></canvas>   
+                        
+                    </div>
+                    <div id="recentChartInfoKDA">
+                        Win Rate: 50%   <br>
+                        KDA: 1-1-1
+                        
+                    </div>
+                    
+                    <div id="recentNumGamesTitle">Games: </div>
+                    <div id="recentGameType">
+                      <div id="recentNumGamesBorder"> <div id="recentNumGames">5</div> - Blind Pick         </div>      <br> 
+                      <div id="recentNumGamesBorder"> <div id="recentNumGames">0</div> - Draft Pick         </div>      <br>
+                      <div id="recentNumGamesBorder"> <div id="recentNumGames">5</div> - Ranked Solo/Duo    </div>      <br>
+                        
+                    </div>
+                     <div id="recentGameType">
+                      <div id="recentNumGamesBorder"> <div id="recentNumGames">0</div> - Ranked Flex        </div>      <br>
+                      <div id="recentNumGamesBorder"> <div id="recentNumGames">5</div> - ARAM               </div>      <br>
+                      <div id="recentNumGamesBorder"> <div id="recentNumGames">0</div> - Featured Gamemode  </div>      <br>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div id="matchHistoryFilter">
+            <div>
+                <select id="matchHistSelect">
+                  <option>All</option>
+                  <option>Blind</option>
+                  <option>Draft</option>
+                  <option>Ranked</option>
+                  <option>Flex</option>
+                  <option>ARAM</option>
+                  <option>Featured</option>
+                </select>
+            </div>
+            <div id="dropdown-button-Controller-Div">
+                <button class="dropdown-button-Controller-Collapse"> Collapse </button>
+                <button class="dropdown-button-Controller-Expand"> Expand </button>
+            </div>
+            
+        </div>
+        
+        <div id="matchHistory">
+            
+            
+            
+            <div class="dropdown-container-matchHistorygame">
+            
+                <div class="matchHistorygame-ButtonDivClass" id="matchHistorygame-ButtonDiv"> 
+                    <button class="dropdown-button-matchHistorygame"> ^ </button>
+                     &nbsp; ARAM - 1 Day(s) Ago - Victory
+                </div>
+               
+                <div class="dropdown-content-matchHistorygame" hidden>
+                    <div id="matchHistorygame-Summoner">
+                        Narthen 
+                        <img id="matchHistorygameSummonerChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                        Thresh
+                        
+                    </div>
+                    <div id="matchHistorygame-SummonerStats">
+                        <div>#-#-#</div>
+                        <div>#.# KDA</div> 
+                        <div>## CS</div>
+                        
+                    </div>
+                    
+                    
+                    <div id="matchHistorygame-PlayersInGame">
+                        <div id="matchHistorygame-PlayersInGame-Team1">
+                            <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            NarthenAVeryLong <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                            <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            Narthen <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                            <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            Narthen <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                            <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            Narthen <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                            <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            Narthen <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                        
+                        </div>
+                        <div id="matchHistorygame-PlayersInGame-Team2">
+                             <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            NarthenAVeryLong <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                            <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            Narthen <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                            <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            Narthen <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                            <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            Narthen <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                            <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            Narthen <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+             <div class="dropdown-container-matchHistorygame">
+            
+                <div class="matchHistorygame-ButtonDivClass" id="matchHistorygame-ButtonDiv"> 
+                    <button class="dropdown-button-matchHistorygame"> ^ </button>
+                     &nbsp; ARAM - 1 Day(s) Ago - Defeat
+                </div>
+               
+                <div class="dropdown-content-matchHistorygame" hidden>
+                    <div id="matchHistorygame-Summoner">
+                        Narthen 
+                        <img id="matchHistorygameSummonerChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                        Thresh
+                        
+                    </div>
+                    <div id="matchHistorygame-SummonerStats">
+                        <div>#-#-#</div>
+                        <div>#.# KDA</div> 
+                        <div>## CS</div>
+                        
+                    </div>
+                    
+                    
+                    <div id="matchHistorygame-PlayersInGame">
+                        <div id="matchHistorygame-PlayersInGame-Team1">
+                            <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            NarthenAVeryLong <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                            <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            Narthen <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                            <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            Narthen <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                            <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            Narthen <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                            <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            Narthen <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                        
+                        </div>
+                        <div id="matchHistorygame-PlayersInGame-Team2">
+                             <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            NarthenAVeryLong <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                            <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            Narthen <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                            <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            Narthen <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                            <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            Narthen <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                            <img id="matchHistorygameChampionImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940"> 
+                            Narthen <span id="matchHistorygame-PlayersInGame-Stats">&nbsp; Gold 4 &nbsp; #-#-# &nbsp; 34k-g</span> <br>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        	<script src="mostPlayedChampions.js"></script>
+      
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+            <script>
+              import doughnutlabel from "chartjs-plugin-doughnutlabel";
+              Chart.plugins.register(doughnutlabel);
+            </script>
+            <script src="winLossChart.js"></script>
+  			
+  			<script src="matchHistory.js"></script>
+        
+            
+    </div>    
+    
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
