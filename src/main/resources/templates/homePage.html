@@ -285,27 +285,28 @@
                 
                 <div class="dropdown-content-RecentGames" id="matchHistStats">
                     <div id="recentChartInfo">
-                        Wins: 10 &nbsp;&nbsp;&nbsp;<br> Losses: 10 &nbsp;&nbsp;&nbsp
+                        Wins: [[${summoner.getRecentMatchSummary().getWins()}]] &nbsp;&nbsp;&nbsp;<br> Losses: [[${summoner.getRecentMatchSummary().getLosses()}]] &nbsp;&nbsp;&nbsp;
                         <canvas id="recentGamesChart" ></canvas>   
                         
                     </div>
                     <div id="recentChartInfoKDA">
-                        Win Rate: 50%   <br>
-                        KDA: 1-1-1
+                        Win Rate: [[${summoner.getRecentMatchSummary().getWinRate()}]]%   <br>
+                        KDA: [[${summoner.getRecentMatchSummary().getKda()}]]		<br>
+                        KD: [[${summoner.getRecentMatchSummary().getKd()}]]
                         
                     </div>
                     
                     <div id="recentNumGamesTitle">Games: </div>
                     <div id="recentGameType">
-                      <div id="recentNumGamesBorder"> <div id="recentNumGames">5</div> - Blind Pick         </div>      <br> 
-                      <div id="recentNumGamesBorder"> <div id="recentNumGames">0</div> - Draft Pick         </div>      <br>
-                      <div id="recentNumGamesBorder"> <div id="recentNumGames">5</div> - Ranked Solo/Duo    </div>      <br>
+                      <div id="recentNumGamesBorder"> <div id="recentNumGames">[[${summoner.getRecentMatchSummary().getBlindGames()}]]</div> - Blind Pick         </div>      <br> 
+                      <div id="recentNumGamesBorder"> <div id="recentNumGames">[[${summoner.getRecentMatchSummary().getDraftGames()}]]</div> - Draft Pick         </div>      <br>
+                      <div id="recentNumGamesBorder"> <div id="recentNumGames">[[${summoner.getRecentMatchSummary().getRankedGames()}]]</div> - Ranked Solo/Duo    </div>      <br>
                         
                     </div>
                      <div id="recentGameType">
-                      <div id="recentNumGamesBorder"> <div id="recentNumGames">0</div> - Ranked Flex        </div>      <br>
-                      <div id="recentNumGamesBorder"> <div id="recentNumGames">5</div> - ARAM               </div>      <br>
-                      <div id="recentNumGamesBorder"> <div id="recentNumGames">0</div> - Featured Gamemode  </div>      <br>
+                      <div id="recentNumGamesBorder"> <div id="recentNumGames">[[${summoner.getRecentMatchSummary().getFlexGames()}]]</div> - Ranked Flex        </div>      <br>
+                      <div id="recentNumGamesBorder"> <div id="recentNumGames">[[${summoner.getRecentMatchSummary().getAramGames()}]]</div> - ARAM               </div>      <br>
+                      <div id="recentNumGamesBorder"> <div id="recentNumGames">[[${summoner.getRecentMatchSummary().getOtherGames()}]]</div> - Other </div>      <br>
                     </div>
                 </div>
             </div>
@@ -351,8 +352,8 @@
                         
                     </div>
                     <div id="matchHistorygame-SummonerStats">
-                        <div>[[${match.getSummonerKills()}]]-[[${match.getSummonerDeaths()}]]-[[${match.getSummonerAssists()}]]</div>
-                        <div>[[${match.getSummonerKda()}]] KDA</div> 
+                        <div>[[${match.getSummonerKills()}]]-[[${match.getSummonerDeaths()}]]-[[${match.getSummonerAssists()}]] KDA</div>
+                        <div>[[${match.getSummonerKda()}]] KD</div> 
                         <div>[[${match.getSummonerTotalMinionsKilled()}]] CS</div>
                         
                     </div>

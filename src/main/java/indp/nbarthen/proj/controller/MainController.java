@@ -32,7 +32,7 @@ public class MainController {
 	private int invalidSummoner;
 	private String previousURL;
 	private PlayerAcc currSummoner;
-	
+	private String currMatchType;
 	
 	public MainController(PlayerRepository playerRepository) {
 		this.playerRepository = playerRepository;
@@ -40,6 +40,7 @@ public class MainController {
 		invalidSummoner = 0;
 		previousURL = "/";
 		currSummoner = new PlayerAcc();
+		currMatchType = "All";
 	}
 	
 	 @RequestMapping({"/"})
@@ -67,39 +68,51 @@ public class MainController {
 	 
 	 @RequestMapping({"summoner/{summonerName}"})
 	    public String getSummoner(@PathVariable("summonerName") String summonerName, @RequestParam(value = "matchType", required = false) String matchType, @RequestParam(value = "loadMore", required = false) String loadMore, Model model) throws JsonMappingException, JsonProcessingException {
+		 	
 		 	PlayerAcc summoner = new PlayerAcc();
+		 	//If just loading additional match history games OR filtering for game type.
 		 	if(getCurrSummoner().getAccName().equals(summonerName)) {
 		 		summoner = getCurrSummoner();
+		 		if(loadMore != null) {
+		 			//Just loading 10 more games
+		 			summoner = GetMatchHistory.matchHistory(summoner, getCurrMatchType(), true);
+		 		}
+		 		else {
+		 			//Reloading 20 games of a specific queue
+		 			summoner = GetMatchHistory.matchHistory(summoner, matchType, false);
+		 			setCurrMatchType(matchType);
+		 		}
 		 	}
-		 	
-		 	//Gets patch info from API + sets Icon URL
-		 	summoner = GetCurrentPatch.currentPatch(summoner);
-		 	
-		 	//Gets the basic info if the given summoner 				Location: top of page
-		 	summoner = RetrieveAccountGenericInfo.retrieveAccountGenericInfo(summoner, summonerName);
-		 	
-		 	//Gets the basic Ranked info if the given summoner 			Location: top of page
-		 	summoner = GetRankInfo.rankInformation(summoner, summoner.getAccId());
-		 	
-		 	//GetMatchHistory.matchHistory calls all of the necessary APIs to get the matchHistory info
-		 	if(loadMore != null) {
-		 		summoner = GetMatchHistory.matchHistory(summoner, matchType, true);
-		 	}
+		 	//If request is a completely new summoner
 		 	else {
-		 		summoner = GetMatchHistory.matchHistory(summoner, matchType, false);
+			 	//Gets patch info from API + sets Icon URL
+			 	summoner = GetCurrentPatch.currentPatch(summoner);
+			 	
+			 	//Gets the basic info if the given summoner 				Location: top of page
+			 	summoner = RetrieveAccountGenericInfo.retrieveAccountGenericInfo(summoner, summonerName);
+			 	
+			 	//Gets the basic Ranked info if the given summoner 			Location: top of page
+			 	summoner = GetRankInfo.rankInformation(summoner, summoner.getAccId());
+			 	
+			 	//GetMatchHistory.matchHistory calls all of the necessary APIs to get the matchHistory info
+			 	summoner = GetMatchHistory.matchHistory(summoner, matchType, false);
+			 	
+			 	
+			 	//If API does not return information - redirect + show popup
+			 	if(summoner.getAccId().contains("Error")) {
+			 		setInvalidSummoner(1);
+			 		return "redirect:/";
+			 	}
+			 	else {
+			 		setInvalidSummoner(0);
+			 	}
+			 	setCurrMatchType(matchType);
 		 	}
 		 	
-		 	//If API does not return information - redirect + show popup
-		 	if(summoner.getAccId().contains("Error")) {
-		 		setInvalidSummoner(1);
-		 		return "redirect:/";
-		 	}
-		 	else {
-		 		setInvalidSummoner(0);
-		 	}
+		 	//Set / Calc recent match summary info.
+		 	summoner.setRecentMatchSummary(CalcRecentMatchInfo.calcRecentMatchInfo(summoner));
 		 	
 		 	setPreviousURL("/summoner/" + summoner.getAccName());
-		 	
 		 	setCurrSummoner(summoner);
 		 	
 		 	model.addAttribute("prevURL", getPreviousURL());
@@ -136,6 +149,14 @@ public class MainController {
 
 	public void setCurrSummoner(PlayerAcc currSummoner) {
 		this.currSummoner = currSummoner;
+	}
+
+	public String getCurrMatchType() {
+		return currMatchType;
+	}
+
+	public void setCurrMatchType(String currMatchType) {
+		this.currMatchType = currMatchType;
 	}
 	 	
 	 

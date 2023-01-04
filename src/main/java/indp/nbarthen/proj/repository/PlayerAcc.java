@@ -26,6 +26,8 @@ public class PlayerAcc {
 	private SummonerRank soloRank;
 	@OneToOne
 	private SummonerRank flexRank;
+	@OneToOne
+	private RecentMatchSummary recentMatchSummary;
 	private Vector<String> matchHistoryList;
 	private Vector<LoLMatch> matchHistory;
 	
@@ -35,6 +37,7 @@ public class PlayerAcc {
 		summonerLevel = 0;
 		soloRank = new SummonerRank("Solo/Duo");
 		flexRank = new SummonerRank("Flex");
+		recentMatchSummary = new RecentMatchSummary();
 		matchHistoryList = new Vector<String>();
 		matchHistory = new Vector<LoLMatch>();
 	}
@@ -320,6 +323,16 @@ public class PlayerAcc {
 	    
 	    //Start MATCH HISTORY getter/setters
 	    
+		public RecentMatchSummary getRecentMatchSummary() {
+			return recentMatchSummary;
+		}
+
+
+		public void setRecentMatchSummary(RecentMatchSummary recentMatchSummary) {
+			this.recentMatchSummary = recentMatchSummary;
+		}
+
+
 		public Vector<String> getMatchHistoryList() {
 			return matchHistoryList;
 		}

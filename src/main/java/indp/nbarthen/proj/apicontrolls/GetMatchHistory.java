@@ -41,7 +41,7 @@ public class GetMatchHistory {
 			else {
 				//Get 10 more games from match history of current queue type.
 				start = summoner.getMatchHistoryList().size();
-				end = start+10;
+				end = 10;
 			}
 			
 			String matchHistListUrl;
