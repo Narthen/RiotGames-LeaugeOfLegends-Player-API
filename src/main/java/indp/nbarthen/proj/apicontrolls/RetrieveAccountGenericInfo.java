@@ -42,13 +42,15 @@ public class RetrieveAccountGenericInfo {
 			
 			return summoner;
 			
-		} catch (HttpClientErrorException e) {
-		    //Error 404 (summoner name not found)  OR  invalid api_key
-			summoner.setAccId("404 Error - Invalid summoner name or api_key");
-			return summoner;
 		} catch (Exception e) {
 		    // code to handle any other exceptions goes here
-			summoner.setAccId("Error");
+			if (e.toString().contains("HTTP response code: 404")) {
+				 System.out.println("Error getting match history information. Reason - Summoner was likely not found. Check summoner ID used.");
+				 System.out.println(e);
+				 summoner.setApiError("Error: Error getting summoner namn/id. Retry or fix.");
+				 return summoner;
+			}
+			summoner.setApiError("Error: Error getting generic summoner information. Retry.");
 			return summoner;
 		}
 

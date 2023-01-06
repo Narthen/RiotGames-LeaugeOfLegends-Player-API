@@ -45,23 +45,28 @@ public class MainController {
 	
 	 @RequestMapping({"/"})
 	    public String homePage(Model model) throws JsonMappingException, JsonProcessingException {
+		 	
 		 	PlayerAcc summoner = new PlayerAcc();
+		 	String popupError = "none";
 		 	//Gets patch info from API + sets Icon URL
 		 	summoner = GetCurrentPatch.currentPatch(summoner);
-		 	//Show invalid summoner name popup
-		 	if(getInvalidSummoner() == 1) {
-		 		setInvalidSummoner(0);
-		 		model.addAttribute("popup", 1);
-		 	}
-		 	else {
-		 		//Dont show invalid summoner name popup
-		 		model.addAttribute("popup", 0);
+		 	
+		 	//If user was redirected after Summoner Search. Show popup error on webpage
+		 	if(getCurrSummoner().getApiError().contains("Error")) {
+		 		summoner = getCurrSummoner();
+		 		popupError = summoner.getApiError();
+		 		model.addAttribute("summoner", summoner);
+		 		model.addAttribute("popupError", popupError);
+			 	model.addAttribute("prevURL", getPreviousURL());
+		 		summoner.setApiError("");
+		 		setCurrSummoner(summoner);
+		 		return "homePage";
 		 	}
 		 	
-		 	
+		 	setPreviousURL("/");
 		 	model.addAttribute("summoner", summoner);
+		 	model.addAttribute("popupError", popupError);
 		 	model.addAttribute("prevURL", getPreviousURL());
-		 	
 		 	
 	        return "homePage";
 	    }
@@ -70,9 +75,24 @@ public class MainController {
 	    public String getSummoner(@PathVariable("summonerName") String summonerName, @RequestParam(value = "matchType", required = false) String matchType, @RequestParam(value = "loadMore", required = false) String loadMore, Model model) throws JsonMappingException, JsonProcessingException {
 		 	
 		 	PlayerAcc summoner = new PlayerAcc();
-		 	//If just loading additional match history games OR filtering for game type.
+		 	String popupError = "none";
+		 	
+		 	//If just loading additional match history games OR filtering for game type OR catching previous redirect Error.
 		 	if(getCurrSummoner().getAccName().equals(summonerName)) {
 		 		summoner = getCurrSummoner();
+		 		
+		 		//If API does not return all information (was redirect + show popup).
+			 	if(summoner.getApiError().contains("Error")) {
+			 		popupError = summoner.getApiError();
+			 		model.addAttribute("prevURL", getPreviousURL());
+			 		model.addAttribute("popupError", popupError);
+				 	model.addAttribute("summoner", summoner);
+				 	//Clear summoner's error msg for next request.
+				 	summoner.setApiError("");
+				 	setCurrSummoner(summoner);
+			        return "homePage";
+			 	}
+			 	
 		 		if(loadMore != null) {
 		 			//Just loading 10 more games
 		 			summoner = GetMatchHistory.matchHistory(summoner, getCurrMatchType(), true);
@@ -97,20 +117,20 @@ public class MainController {
 			 	//GetMatchHistory.matchHistory calls all of the necessary APIs to get the matchHistory info
 			 	summoner = GetMatchHistory.matchHistory(summoner, matchType, false);
 			 	
-			 	
-			 	//If API does not return information - redirect + show popup
-			 	if(summoner.getAccId().contains("Error")) {
-			 		setInvalidSummoner(1);
-			 		return "redirect:/";
-			 	}
-			 	else {
-			 		setInvalidSummoner(0);
-			 	}
 			 	setCurrMatchType(matchType);
+		 	}
+		 	
+		 	//If API does not return information - redirect + show popup
+		 	if(summoner.getApiError().contains("Error")) {
+		 		setCurrSummoner(summoner);
+		 		return "redirect:" +  getPreviousURL();
 		 	}
 		 	
 		 	//Set / Calc recent match summary info.
 		 	summoner.setRecentMatchSummary(CalcRecentMatchInfo.calcRecentMatchInfo(summoner));
+		 	//Set / Calc recent champion stats.
+		 	
+		 	
 		 	
 		 	setPreviousURL("/summoner/" + summoner.getAccName());
 		 	setCurrSummoner(summoner);

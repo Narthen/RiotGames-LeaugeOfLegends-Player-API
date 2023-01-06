@@ -2,6 +2,7 @@ package indp.nbarthen.proj.apicontrolls;
 
 import java.util.Vector;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -27,6 +28,7 @@ import java.net.URL;
 public class GetMatchHistory {
 	
 	public static PlayerAcc matchHistory(PlayerAcc summoner, String matchType, boolean loadMore) throws JsonMappingException, JsonProcessingException {
+		PlayerAcc unchangedSummoner = summoner;
 		try {
 			Dotenv dotenv = Dotenv.load();
 			String apiKey = dotenv.get("API_KEY");		
@@ -78,13 +80,58 @@ public class GetMatchHistory {
 			
 			return ParallelGetMatchHistory.parallellMatchHistory(summoner, gameIds, loadMore);
 			
-		}  catch (Exception e) {
-		    // code to handle any other exceptions goes here
-			System.out.println("Error getting match history information");
-			System.out.println(e);
-			summoner.setAccId("Error");
-			return summoner;
+		} catch (Exception e) {
+			//Catch possible API request errors + reasons.
+			 if (e.toString().contains("\"status_code\":400")) {
+				 System.out.println("Error getting match history information array. Reasons - 'syntax error in the request and the request has therefore been denied'");
+				 System.out.println(e);
+				 unchangedSummoner.setApiError("Error: Syntax Error - Invalid Summoner. Retry.");
+				 return unchangedSummoner;
+			 } 
+			 else if (e.toString().contains("\"status_code\":401")) {
+				 System.out.println("Error getting match history information array. Reason - API Key denied");
+				 System.out.println(e);
+				 unchangedSummoner.setApiError("Error: API Key denied.");
+
+				 return unchangedSummoner;
+			 } 
+			 else if (e.toString().contains("\"status_code\":403")) {
+				 System.out.println("Error getting match history information array. Reason - server understood the request but refuses to authorize it");
+				 System.out.println(e);
+				 unchangedSummoner.setApiError("Error: Server refused request. Retry or fix.");
+
+				 return unchangedSummoner;
+			 } 
+			 else if (e.toString().contains("\"status_code\":404")) {
+				 System.out.println("Error getting match history information array. Reason - Summoner was likely not found. Check summoner ID used.");
+				 System.out.println(e);
+				 unchangedSummoner.setApiError("Error: Error getting summoner namn/id. Retry or fix.");
+
+				 return unchangedSummoner;
+			 } 
+			 else if (e.toString().contains("\"status_code\":415")) {
+				 System.out.println("Error getting match history information array. Reasons: Unsupported Media Type. Content-Type header was not appropriately set.");
+				 System.out.println(e);
+				 unchangedSummoner.setApiError("Error - Unsupported Media Type. Retry or fix.");
+
+				 return unchangedSummoner; 
+			 } 
+			 else if (e.toString().contains("HTTP response code: 429")) {
+				 System.out.println("Error getting match history information array. Rate Limit Exceeded. Wait a few seconds and retry request.");
+				 System.out.println(e);
+				 unchangedSummoner.setApiError("Error: Too many requests. Wait a few seconds and retry.");
+
+				 return unchangedSummoner;
+			 } 
+			else {
+			    // code to handle any other exceptions goes here
+				System.out.println("Error getting match history information array");
+				System.out.println(e);
+				summoner.setApiError("Error: Error getting match history information. Retry");
+				return summoner;
+			}
 		}
+
 
 	}
 

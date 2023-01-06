@@ -4,7 +4,7 @@
 
 				window.onload = function() {
 				    var popupElement = document.getElementById("popup");
-				    if (popupElement.classList.contains("1")) {
-				      alert("Invalid Summoner Name");
+				    if (popupElement.innerText.includes("Error")) {
+				        alert(popupElement.innerText);
 				    }
 				  }

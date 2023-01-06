@@ -61,7 +61,9 @@ public class GetRankInfo {
 			
 		}  catch (Exception e) {
 		    // code to handle any other exceptions goes here
-			summoner.setAccId("Error");
+			System.out.println("Error getting ranked information");
+			System.out.println(e);
+			summoner.setAccId("Error: Error getting ranked information.");
 			return summoner;
 		}
 

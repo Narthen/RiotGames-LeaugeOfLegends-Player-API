@@ -34,7 +34,8 @@ public class GetCurrentPatch {
 			
 		}  catch (Exception e) {
 		    // code to handle any other exceptions goes here
-			summoner.setAccId("Error");
+			System.out.println(e);
+			summoner.setApiError("Error: Error Getting Patch Name.");
 			return summoner;
 		}
 

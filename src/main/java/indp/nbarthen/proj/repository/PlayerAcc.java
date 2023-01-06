@@ -30,6 +30,9 @@ public class PlayerAcc {
 	private RecentMatchSummary recentMatchSummary;
 	private Vector<String> matchHistoryList;
 	private Vector<LoLMatch> matchHistory;
+	private Champion[] recentChampions;
+	
+	private String apiError;
 	
 	public PlayerAcc(){
 		accName = "";
@@ -40,6 +43,9 @@ public class PlayerAcc {
 		recentMatchSummary = new RecentMatchSummary();
 		matchHistoryList = new Vector<String>();
 		matchHistory = new Vector<LoLMatch>();
+		//Only saving the user's top 12 most played champions. 
+		recentChampions = new Champion[12];
+		apiError = "";
 	}
 
 
@@ -348,6 +354,26 @@ public class PlayerAcc {
 
 		public void setMatchHistory(Vector<LoLMatch> matchHistory) {
 			this.matchHistory = matchHistory;
+		}
+
+
+		public Champion[] getRecentChampions() {
+			return recentChampions;
+		}
+
+
+		public void setRecentChampions(Champion[] recentChampions) {
+			this.recentChampions = recentChampions;
+		}
+
+
+		public String getApiError() {
+			return apiError;
+		}
+
+
+		public void setApiError(String apiError) {
+			this.apiError = apiError;
 		}
 
 	    
