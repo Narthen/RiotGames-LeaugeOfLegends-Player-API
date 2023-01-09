@@ -15,7 +15,6 @@ import indp.nbarthen.proj.repository.PlayerAcc;
 import indp.nbarthen.proj.repository.RecentMatchSummary;
 
 public class CalcRecentMatchInfo {
-	//Reads the json provided to set the Summoner's Flex Rank information
 	
 	public static RecentMatchSummary calcRecentMatchInfo(PlayerAcc summoner) {
 		RecentMatchSummary summary = new RecentMatchSummary();
@@ -97,6 +96,7 @@ public class CalcRecentMatchInfo {
 			double avgKills = (double) kills / summoner.getMatchHistory().size();
 			//round to first decimal
 			avgKills = Math.round(avgKills * 10) / 10.0;
+			//If's omit decimal if it is a whole number.
 			if (avgKills % 1 == 0) {
 				strAvgKills = String.valueOf((int) avgKills);
 			}
@@ -108,6 +108,7 @@ public class CalcRecentMatchInfo {
 			double avgDeaths = (double) deaths / summoner.getMatchHistory().size();
 			//round to first decimal
 			avgDeaths = Math.round(avgDeaths * 10) / 10.0;
+			//If's omit decimal if it is a whole number.
 			if (avgDeaths % 1 == 0) {
 				strAvgDeaths = String.valueOf((int) avgDeaths);
 			}
@@ -119,6 +120,7 @@ public class CalcRecentMatchInfo {
 			double avgAssists = (double) assists / summoner.getMatchHistory().size();
 			//round to first decimal
 			avgAssists = Math.round(avgAssists * 10) / 10.0;
+			//If's omit decimal if it is a whole number.
 			if (avgAssists % 1 == 0) {
 				strAvgAssists = String.valueOf((int) avgAssists);
 			}
@@ -127,7 +129,11 @@ public class CalcRecentMatchInfo {
 			}
 			
 			//Calc kd
-			double summonerKd = (kills + assists) / (double) deaths;
+			int newDeaths = deaths;
+			if(deaths == 0) {
+				newDeaths = 1;
+			}
+			double summonerKd = (kills + assists) / (double) newDeaths;
 			double roundedKd = Math.round(summonerKd * 10) / 10.0;
 			if (roundedKd % 1 == 0) {
 				strAvgRoundedKd = String.valueOf((int) roundedKd);
@@ -149,7 +155,7 @@ public class CalcRecentMatchInfo {
 			summary.setAramGames(aramGames);
 			summary.setOtherGames(otherGames);
 			
-			//If's omit decimal if it is a whole number.
+			
 			
 			summary.setWinRate(strWinRate);
 			summary.setKda( strAvgKills + " - " + strAvgDeaths + " - " + strAvgAssists );

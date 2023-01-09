@@ -1,5 +1,5 @@
 /**
- * Used to control the dropdown arror (and content) of the Most Played Champions section of the page.
+ * Used to control the dropdown arrow (and content) of the Most Played Champions section of the page.
  */
 
 				const championStatsContent = document.getElementById('championContent');

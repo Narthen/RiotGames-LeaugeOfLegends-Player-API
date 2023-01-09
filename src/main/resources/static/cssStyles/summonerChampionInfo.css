@@ -58,8 +58,8 @@
     }
    
     
-    #noContent {
-      display: none;
+    #false {
+      visibility: hidden;
     }
     
     .championStats {
