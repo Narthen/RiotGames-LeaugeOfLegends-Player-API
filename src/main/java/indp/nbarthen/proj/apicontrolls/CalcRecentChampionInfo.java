@@ -175,11 +175,16 @@ public class CalcRecentChampionInfo {
 			
 		}
 		
-		//Sort champions array based on total games played (secondary criteria of games played are the same, is wins)
+		//Sort champions array based on total games played (secondary criteria is wins. Third criteria is kda)
 		champions.sort((champ1, champ2) -> {
 			int compare = Integer.compare(champ2.getGamesPlayed(), champ1.getGamesPlayed());
 			if (compare == 0) {
-			compare = Integer.compare(champ2.getWins(), champ1.getWins());
+				compare = Integer.compare(champ2.getWins(), champ1.getWins());
+				if (compare == 0) {
+					double kda1 = (champ1.getKills() + champ1.getAssists()) / (double) champ1.getDeaths();
+					double kda2 = (champ2.getKills() + champ2.getAssists()) / (double) champ2.getDeaths();
+					compare = Double.compare(kda2, kda1);
+				}
 			}
 			return compare;
 			});

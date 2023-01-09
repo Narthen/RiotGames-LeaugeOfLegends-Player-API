@@ -2,6 +2,7 @@
 
 	#topSection {
         height: 200px; 
+        background-color: rgb(0, 43, 128);
     }
     .container {
         display:table;
@@ -26,8 +27,7 @@
         text-align: center;
         font-family: Monospace;
         font-size: 20px;
-        color: red;
-        background-color: rgb(26, 83, 255);
+        color: rgb(204, 153, 0);
         
         border: 5px solid black;
     }
@@ -48,14 +48,15 @@
         padding-right: 10px;
         display: flex;
         align-items: center;
-        background-color: rgb(93, 128, 198);
         
         border-top: 5px solid black;
         border-bottom: 5px solid black;
     }
     #rankImg {
-        max-width: 120px;
-        max-width: 120px;
+    	height: 115px;
+    	width: 115px;
+        max-height: 115px;
+        max-width: 115px;
     }
     
     #rank {
@@ -66,7 +67,6 @@
         display: flex;
         align-items: center;
         font-family: Trebuchet MS;
-        background-color: rgb(93, 128, 198);
         
         border-right: 5px solid black;
         border-top: 5px solid black;
@@ -76,8 +76,13 @@
    
     #rankText {
         padding-left: 0px;
-        color: rgb(230, 184, 0);
+        color: rgb(255, 133, 51);
     }
+    
+    #rankTextMode{
+    	 color: rgb(230, 184, 0);
+    }
+    
     #wins {
         color: rgb(102, 255, 102);
     }
@@ -85,7 +90,7 @@
         color: rgb(255, 80, 80);
     }
     #winPer {
-        color: rgb(153, 102, 0);
+        color: rgb(204, 153, 0);
     }
     
     
@@ -97,7 +102,6 @@
         padding-right: 10px;
         display: flex;
         align-items: center;
-        background-color: rgb(102, 153, 255);
         
         border-top: 5px solid black;
         border-bottom: 5px solid black;
@@ -111,7 +115,6 @@
         display: flex;
         align-items: center;
         font-family: Trebuchet MS;
-        background-color: rgb(102, 153, 255);
         
         border-top: 5px solid black;
         border-bottom: 5px solid black;
@@ -123,7 +126,6 @@
         width: calc(100% - 281px - 38%);
         height: 200px;
         border: 5px solid black;
-        background-color: rgb(133, 163, 224);
         font-family: Trebuchet MS;
     }
     #searchAndSave{

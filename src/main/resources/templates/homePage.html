@@ -40,7 +40,7 @@
                 
                 <div id="rankText">
                   <b>
-                    <span th:text="${summoner.getSoloRankQueueType() + ':'}"></span> <br>
+                    <span id="rankTextMode" th:text="${summoner.getSoloRankQueueType() + ':'}"></span> <br>
                     <span th:text="${summoner.getSoloRankTier() + ' ' + summoner.getSoloRankRank()}"></span> <br>
                     <span th:text="'LP: ' + ${summoner.getSoloRankLeaguePoints() + 'lp'}"> </span><br> <br>
                     <span id="wins" th:text="${summoner.getSoloRankWins() + ' W'}"></span> - <span id="losses" th:text="${summoner.getSoloRankLosses() + ' L'}"></span> <br>
@@ -59,7 +59,7 @@
                 
                 <div id="rankText">
                   <b>
-                    <span th:text="${summoner.getFlexRankQueueType() + ':'}"></span> <br>
+                    <span id="rankTextMode" th:text="${summoner.getFlexRankQueueType() + ':'}"></span> <br>
                     <span th:text="${summoner.getFlexRankTier() + ' ' + summoner.getFlexRankRank()}"></span> <br>
                     <span th:text="'LP: ' + ${summoner.getFlexRankLeaguePoints() + 'lp'}"> </span><br> <br>
                     <span id="wins" th:text="${summoner.getFlexRankWins() + ' W'}"></span> - <span id="losses" th:text="${summoner.getFlexRankLosses() + ' L'}"></span> <br>
@@ -108,7 +108,7 @@
               <!-- HTML for the dropdown button -->
                 <div id="mostPlayedChamps"> 
                     <button class="dropdown-button" id="toggleChampionButton"> ^ </button>
-                     &nbsp; Most Played Champions: 
+                     &nbsp; Most Played Champions (in [[${summoner.getMatchHistoryList().size()}]] Games):  
                 </div>
                 <!-- HTML for the dropdown content -->
                 <div class="dropdown-content" id="championContent" hidden>
@@ -185,6 +185,9 @@
 	                </select>
 	        	</form>
             </div>
+            <div id="recentGamesTotal">
+            	Total Games: [[${summoner.getMatchHistoryList().size()}]]
+            </div>
             <div id="dropdown-button-Controller-Div">
                 <button class="dropdown-button-Controller-Collapse"> Collapse </button>
                 <button class="dropdown-button-Controller-Expand"> Expand </button>
@@ -196,11 +199,11 @@
             
             
             
-            <div class="dropdown-container-matchHistorygame" th:each="match : ${summoner.getMatchHistory()}">
+            <div class="dropdown-container-matchHistorygame" th:each="match, iterStat : ${summoner.getMatchHistory()}">
             
                 <div class="matchHistorygame-ButtonDivClass" id="matchHistorygame-ButtonDiv"> 
                     <button class="dropdown-button-matchHistorygame"> ^ </button>
-                     &nbsp; [[${match.getQueueName()}]] &nbsp; - &nbsp; [[${match.getGameEndTimestamp()}]] &nbsp;&nbsp; [[${match.getWinLoss()}]]
+                      &nbsp;[[${iterStat.index + 1}]] - [[${match.getQueueName()}]] &nbsp; - &nbsp; [[${match.getGameEndTimestamp()}]] &nbsp;&nbsp; [[${match.getWinLoss()}]]
                 </div>
                
                 <div class="dropdown-content-matchHistorygame" hidden>
