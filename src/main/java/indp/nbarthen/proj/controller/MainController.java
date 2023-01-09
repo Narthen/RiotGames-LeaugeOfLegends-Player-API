@@ -129,7 +129,7 @@ public class MainController {
 		 	//Set / Calc recent match summary info.
 		 	summoner.setRecentMatchSummary(CalcRecentMatchInfo.calcRecentMatchInfo(summoner));
 		 	//Set / Calc recent champion stats.
-		 	
+		 	summoner.setRecentChampions(CalcRecentChampionInfo.calcRecentChampionInfo(summoner));
 		 	
 		 	
 		 	setPreviousURL("/summoner/" + summoner.getAccName());

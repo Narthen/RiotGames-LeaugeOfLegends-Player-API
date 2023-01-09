@@ -176,9 +176,21 @@ public class LoLMatch {
 	}
 	
 	public String getSummonerKda() {
-		double summonerKda = (summonerKills + summonerAssists) / (double) summonerDeaths;
-		double roundedKda = Math.round(summonerKda * 10) / 10.0;
-		return Double.toString(roundedKda);
+		int deaths = summonerDeaths;
+		if(summonerDeaths == 0) {
+			deaths = 1;
+		}
+		
+		double summonerKd = (summonerKills + summonerAssists) / (double) deaths;
+		double roundedKd = Math.round(summonerKd * 10) / 10.0;
+		//If's omit decimal if it is a whole number.
+		if (roundedKd % 1 == 0) {
+			return String.valueOf((int) roundedKd);
+		}
+		else {
+			return String.valueOf(roundedKd);
+		}
+		
 	}
 	
 	

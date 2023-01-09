@@ -113,162 +113,21 @@
                 <!-- HTML for the dropdown content -->
                 <div class="dropdown-content" id="championContent" hidden>
                 
-                    <div class="championStats" id="hasContent">
-                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
+                    <div class="championStats" th:each="champion, iterStat : ${summoner.getRecentChampions()}" th:id=${champion.getChampionExists()} th:if="${iterStat.index} < 12">
+                     <img id="championImage" th:src="${champion.getSummonerChampionUrl()}">
                        <div id="championWinLoss">
-                          <div id="championName">Thresh</div>
-                          <div>50%</div>
-                          <div>10W - 10L</div>
+                          <div id="championName">[[${champion.getSummonerChampionName()}]]</div>
+                          <div>[[${champion.getWinRate()}]]%</div>
+                          <div>[[${champion.getWins()}]]W - [[${champion.getLosses()}]]L</div>
                         </div>
                         
                         <div id="championKDA">
-                          <div>2.58 KDA</div>
-                          <div>2.1-5.2-11.1</div>
+                           <div>[[${champion.getGamesPlayed()}]] Game(s)</div>
+                          <div>[[${champion.getKd()}]] KD</div>
+                          <div>[[${champion.getKda()}]]</div>
                         </div>
                     </div>
-                    <div class="championStats" id="hasContent">
-                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
-                       <div id="championWinLoss">
-                          <div id="championName">Thresh</div>
-                          <div>50%</div>
-                          <div>10W - 10L</div>
-                        </div>
-                        
-                        <div id="championKDA">
-                          <div>2.58 KDA</div>
-                          <div>2.1-5.2-11.1</div>
-                        </div>
-                    </div>
-                    <div class="championStats" id="hasContent">
-                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
-                       <div id="championWinLoss">
-                          <div id="championName">Thresh</div>
-                          <div>50%</div>
-                          <div>10W - 10L</div>
-                        </div>
-                        
-                        <div id="championKDA">
-                          <div>2.58 KDA</div>
-                          <div>2.1-5.2-11.1</div>
-                        </div>
-                    </div>
-                    <div class="championStats" id="hasContent">
-                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
-                       <div id="championWinLoss">
-                          <div id="championName">Thresh</div>
-                          <div>50%</div>
-                          <div>10W - 10L</div>
-                        </div>
-                        
-                        <div id="championKDA">
-                          <div>2.58 KDA</div>
-                          <div>2.1-5.2-11.1</div>
-                        </div>
-                    </div>
-                    <div class="championStats" id="hasContent">
-                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
-                       <div id="championWinLoss">
-                          <div id="championName">Thresh</div>
-                          <div>50%</div>
-                          <div>10W - 10L</div>
-                        </div>
-                        
-                        <div id="championKDA">
-                          <div>2.58 KDA</div>
-                          <div>2.1-5.2-11.1</div>
-                        </div>
-                    </div>
-                    <div class="championStats" id="hasContent">
-                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
-                       <div id="championWinLoss">
-                          <div id="championName">Thresh</div>
-                          <div>50%</div>
-                          <div>10W - 10L</div>
-                        </div>
-                        
-                        <div id="championKDA">
-                          <div>2.58 KDA</div>
-                          <div>2.1-5.2-11.1</div>
-                        </div>
-                    </div>
-                    <div class="championStats" id="hasContent">
-                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
-                       <div id="championWinLoss">
-                          <div id="championName">Thresh</div>
-                          <div>50%</div>
-                          <div>10W - 10L</div>
-                        </div>
-                        
-                        <div id="championKDA">
-                          <div>2.58 KDA</div>
-                          <div>2.1-5.2-11.1</div>
-                        </div>
-                    </div>
-                    <div class="championStats" id="hasContent">
-                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
-                       <div id="championWinLoss">
-                          <div id="championName">Thresh</div>
-                          <div>50%</div>
-                          <div>10W - 10L</div>
-                        </div>
-                        
-                        <div id="championKDA">
-                          <div>2.58 KDA</div>
-                          <div>2.1-5.2-11.1</div>
-                        </div>
-                    </div>
-                    <div class="championStats" id="hasContent">
-                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
-                       <div id="championWinLoss">
-                          <div id="championName">Thresh</div>
-                          <div>50%</div>
-                          <div>10W - 10L</div>
-                        </div>
-                        
-                        <div id="championKDA">
-                          <div>2.58 KDA</div>
-                          <div>2.1-5.2-11.1</div>
-                        </div>
-                    </div>
-                    <div class="championStats" id="hasContent">
-                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
-                       <div id="championWinLoss">
-                          <div id="championName">Thresh</div>
-                          <div>50%</div>
-                          <div>10W - 10L</div>
-                        </div>
-                        
-                        <div id="championKDA">
-                          <div>2.58 KDA</div>
-                          <div>2.1-5.2-11.1</div>
-                        </div>
-                    </div>
-                    <div class="championStats" id="hasContent">
-                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
-                       <div id="championWinLoss">
-                          <div id="championName">Thresh</div>
-                          <div>50%</div>
-                          <div>10W - 10L</div>
-                        </div>
-                        
-                        <div id="championKDA">
-                          <div>2.58 KDA</div>
-                          <div>2.1-5.2-11.1</div>
-                        </div>
-                    </div>
-                    <div class="championStats" id="noContent">
-                     <img id="championImage" src="https://opgg-static.akamaized.net/meta/images/lol/champion/Thresh.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_160&v=1670492996940">
-                       <div id="championWinLoss">
-                          <div id="championName">Thresh</div>
-                          <div>50%</div>
-                          <div>10W - 10L</div>
-                        </div>
-                        
-                        <div id="championKDA">
-                          <div>2.58 KDA</div>
-                          <div>2.1-5.2-11.1</div>
-                        </div>
-                    </div>
+                    
                     
                 </div>
             </div>

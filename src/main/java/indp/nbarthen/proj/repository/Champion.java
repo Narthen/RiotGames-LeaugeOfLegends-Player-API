@@ -1,5 +1,7 @@
 package indp.nbarthen.proj.repository;
 
+import java.util.Vector;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -7,6 +9,7 @@ import jakarta.persistence.Id;
 public class Champion {
 	@Id
 	private String accId;
+	private Vector<String> matchIds; 
 	private int summonerChampionId; //championId
 	private String summonerChampionName; //championName
 	private String summonerChampionUrl; 
@@ -21,8 +24,9 @@ public class Champion {
 	private String kd;
 	private String championExists;
 	
-	Champion(){
-		accId= "";
+	public Champion(){
+		accId = "";
+		matchIds = new Vector<String>();
 		summonerChampionId = 0;
 		summonerChampionName = "";
 		summonerChampionUrl = "";
@@ -35,7 +39,7 @@ public class Champion {
 		winRate = "0";
 		kda = "0-0-0";
 		kd = "0.0";
-		championExists = "false";
+		championExists = "false"; //Used in thymeleaf to display div / data
 	}
 	
 	public String getAccId() {
@@ -44,6 +48,14 @@ public class Champion {
 	public void setAccId(String accId) {
 		this.accId = accId;
 	}
+	public Vector<String> getMatchIds() {
+		return matchIds;
+	}
+
+	public void setMatchIds(Vector<String> matchIds) {
+		this.matchIds = matchIds;
+	}
+
 	public int getSummonerChampionId() {
 		return summonerChampionId;
 	}
@@ -59,8 +71,8 @@ public class Champion {
 	public String getSummonerChampionUrl() {
 		return summonerChampionUrl;
 	}
-	public void setSummonerChampionUrl(String currPatch) {
-		this.summonerChampionUrl = "http://ddragon.leagueoflegends.com/cdn/"+ currPatch +"/img/champion/"+ summonerChampionName +".png";
+	public void setSummonerChampionUrl(String summonerChampionUrl) {
+		this.summonerChampionUrl = summonerChampionUrl;
 	}
 	
 	public int getWins() {
