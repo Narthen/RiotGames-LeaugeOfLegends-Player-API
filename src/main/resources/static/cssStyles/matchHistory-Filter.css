@@ -22,7 +22,7 @@
         font-size: 14pt;
     }
     #dropdown-button-Controller-Div {
-        padding-left: 50px;
+        padding-left: 30px;
         display: flex;
     }
     .dropdown-button-Controller-Collapse {
@@ -50,3 +50,13 @@
           position: relative;
           margin-left: 10px;
     }
+    
+    #recentGamesTotal {
+    	padding-left: 15px;
+    	padding-top: 8px;
+        display: flex;
+        align-items: center;
+        color: rgb(204, 153, 0);
+        font-size: 15pt;
+    }
+    
