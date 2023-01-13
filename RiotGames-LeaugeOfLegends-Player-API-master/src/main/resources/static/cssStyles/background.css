@@ -1,0 +1,29 @@
+@charset "ISO-8859-1";
+
+	html, body { 
+        margin: 0; 
+        padding: 0; 
+        height: 100%; 
+        width: 100%; 
+        background-image: url('http://lol-stats.net/uploads/X0geMjIXBEZOVO5U7CvrqJW3shfN1NaI57cmgyxZ.jpeg'); 
+        background-size: cover;
+        transform: scale(1.0);
+    }
+    header {
+        padding: 20px;
+    }
+    
+    #backgr {
+        position: absolute;
+        height: 100%; 
+        
+    }
+    #textarea {
+        height: 100%; 
+        margin-left: auto;
+        margin-right: auto;
+        min-width: 1200px;
+        max-width: 60%;
+        
+        transform: scale(1.0);
+    }

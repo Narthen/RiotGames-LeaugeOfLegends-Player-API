@@ -1,0 +1,93 @@
+@charset "ISO-8859-1";
+
+	html, body { 
+        margin: 0; 
+        padding: 0; 
+        height: 100%; 
+        width: 100%; 
+        background-image: url('http://lol-stats.net/uploads/X0geMjIXBEZOVO5U7CvrqJW3shfN1NaI57cmgyxZ.jpeg'); 
+        background-size: cover;
+        transform: scale(1.0);
+    }
+    header {
+        padding: 20px;
+    }
+    
+    #backgr {
+        position: absolute;
+        height: 100%; 
+        
+    }
+    #textarea {
+        height: 100%; 
+        margin-left: auto;
+        margin-right: auto;
+        min-width: 500px;
+        max-width: 40%;
+        transform: scale(1.0);
+        
+        background-color: rgb(94 190 255);
+        border: 5px solid black;
+        font-family: Trebuchet MS;
+    }
+    
+    #mainText{
+    	padding-top: 10px;
+    	padding-left: 10px;
+    	padding-right: 10px;
+    }
+    
+    #backAndSearch {
+    	display: flex; 
+    	justify-content: space-between;
+    }
+    #searchForm {
+    	display: flex;
+    }
+    #savedSummonersTitle {
+    	text-align: center;
+    	font-size: 30px;
+    	color: rgb(255, 117, 26);
+    	padding-bottom: 10px;
+    }
+    
+    #summonerInfoParent {
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    flex-direction: column;
+	    font-size: 18px;
+    }
+    #summonerInfo {
+    	display: flex;
+    	align-items: center;
+    	text-align: center; 
+    	justify-content: center;
+    	width: 95%;
+    	border: 3px solid black;
+    	margin-top: -3px;
+    	
+    }
+    
+    #nameDiv {
+    	color: rgb(38, 74, 255);
+    }
+    
+     #dateDiv {
+    	color: rgb(115, 115, 115);
+    }
+    
+     #gamesDiv {
+    	color: rgb(29, 126, 255);
+    }
+    
+     #gamemodeDiv {
+    	color: rgb(29, 126, 255);
+    }
+    
+    #hyphen {
+    	color: black;
+    }
+    
+    
+    

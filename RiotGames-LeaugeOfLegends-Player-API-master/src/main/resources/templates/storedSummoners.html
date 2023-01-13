@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="ISO-8859-1">
+<title>LoL Account Info</title>
+
+<link rel="stylesheet" href="/cssStyles/background.css">
+<link rel="stylesheet" href="/cssStyles/storedSummoners.css">
+
+
+
+
+</head>
+<body>
+     <div id="backgr">
+     </div>     
+    <div>
+        <br>
+    </div>
+    <div id="textarea">
+      <div id="mainText">
+		    <div id="backAndSearch">
+		     	<button id="back-button" onclick="location.href=[[${prevURL}]]">Go Back</button>
+
+
+
+		     	
+			    <div id="searchForm">
+			    
+			       	<form id="getSummoner" method="get" th:action="@{/summoner}">
+					   <input type="submit" value="Search" />
+					   <input type="text" id="summonerName" placeholder=" SummonerName" size="15" style="height:20px; font-size:11pt;" required pattern=".*\S.*"/>
+						<select id="mirrorSelect" th:name="matchType"  style="display: none;">
+					      <option>All</option>
+					      <option>Blind</option>
+					      <option>Draft</option>
+					      <option>Ranked</option>
+					      <option>Flex</option>
+					      <option>ARAM</option>
+					    </select>
+					</form>
+					
+			    </div>
+		    </div>
+		    
+		    
+		    <div id="savedSummonersTitle">Saved Summoners</div>
+		    
+		    <div id="summonerInfoParent">
+			    <div id="summonerInfo" th:each="summoner : ${allSummoners}">
+			        <div id="nameDiv"> <b> [[${summoner.getAccName()}]] </b> <span id="hyphen">&nbsp; - &nbsp;</span> </div>
+			        <div id="dateDiv">[[${summoner.getMatchHistory().get(0).getDate()}]] <span id="hyphen">--&nbsp;</span></div>
+			        <div id="dateDiv">[[${summoner.getMatchHistory().get(summoner.getMatchHistory().size() - 1).getDate()}]]<span id="hyphen">&nbsp; --- &nbsp;</span></div>
+			        <div id="gamesDiv">Games: [[${summoner.getMatchHistoryList().size()}]] <span id="hyphen">&nbsp; --- &nbsp;</span></div>
+			        <div id="gamemodeDiv">Most: [[${summoner.getRecentMatchSummary.getMostPlayedMode()}]]</div>
+			    </div>
+			    
+			   
+			</div>
+
+     </div>   
+        
+    </div>
+    
+	<script src="/getSummonerPageURL.js"></script>
+	<script th:inline="javascript">
+			  window.onpopstate = function(event) {
+			    window.location = [[${prevURL}]];
+			  }
+	</script>
+	<script>
+	    var prevURL = "[[${prevURL}]]";
+	    var button = document.getElementById("back-button");
+	    button.onclick = function() {
+	        location.href = prevURL;
+	    }
+	</script>
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

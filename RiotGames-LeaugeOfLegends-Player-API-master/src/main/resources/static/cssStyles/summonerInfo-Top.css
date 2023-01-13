@@ -1,0 +1,181 @@
+@charset "ISO-8859-1";
+
+	#disclaimer {
+		background-color: rgb(0, 57, 142);
+		border-top: 5px solid black;
+		border-left: 5px solid black;
+		border-right: 5px solid black;
+		
+	}
+	 #disclaimerButtonDiv {
+         display: flex;
+         align-items: center;
+         font-family: Trebuchet MS;
+         color: rgb(255, 77, 77);
+         font-size: 15pt;
+         padding-top: 3px;
+         padding-bottom: 3px;
+         padding-left: 5px;
+    }
+      
+    .dropdown-content-Disclaimer {
+      position: relative; 
+      z-index: 1;  /* make sure the content is above other elements on the page */
+      display: inline;  
+      padding-bottom: 5px;
+      padding-left: 10px;
+    }
+    
+	.disclaimerContent {
+		padding-left: 30px;
+        font-family: Trebuchet MS;
+        color: white;
+    }
+	#riotLink {
+		color: rgb(51, 204, 51);
+	}
+	#JibberJabberNotice {
+		color: rgb(255, 187, 51);
+	}
+
+
+	#topSection {
+        height: 200px; 
+        background-color: rgb(0, 43, 128);
+    }
+    .container {
+        display:table;
+        width:100%;
+    
+    }
+    .column {
+      float: left;
+      padding-top: 0px;
+      color:white;
+      
+    }
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    
+    #lvl {
+        height: 200px;
+        width: 18%;
+        text-align: center;
+        font-family: Monospace;
+        font-size: 20px;
+        color: rgb(204, 153, 0);
+        
+        border: 5px solid black;
+    }
+    #summonerIconImg {
+        border: 5px solid rgb(48, 48, 48);
+        padding: 0;
+        height: 131px; 
+        width: 131px;
+        max-height: 131px;
+        max-width: 131px;
+    }
+    
+    #rankIcon {
+        height: 200px; 
+        width: 100px;
+        padding-left: 0px;
+        padding-top: 0px;
+        padding-right: 10px;
+        display: flex;
+        align-items: center;
+        
+        border-top: 5px solid black;
+        border-bottom: 5px solid black;
+    }
+    #rankImg {
+    	height: 115px;
+    	width: 115px;
+        max-height: 115px;
+        max-width: 115px;
+    }
+    
+    #rank {
+        height: 200px; 
+        width: 10%;
+        padding-left: 3px;
+        padding-right: 15px;
+        display: flex;
+        align-items: center;
+        font-family: Trebuchet MS;
+        
+        border-right: 5px solid black;
+        border-top: 5px solid black;
+        border-bottom: 5px solid black;
+        
+    }
+   
+    #rankText {
+        padding-left: 0px;
+        color: rgb(255, 133, 51);
+    }
+    
+    #rankTextMode{
+    	 color: rgb(230, 184, 0);
+    }
+    
+    #wins {
+        color: rgb(102, 255, 102);
+    }
+    #losses {
+        color: rgb(255, 80, 80);
+    }
+    #winPer {
+        color: rgb(204, 153, 0);
+    }
+    
+    
+    #flexIcon {
+        height: 200px; 
+        width: 100px;
+        padding-left: 0px;
+        padding-top: 0px;
+        padding-right: 10px;
+        display: flex;
+        align-items: center;
+        
+        border-top: 5px solid black;
+        border-bottom: 5px solid black;
+    }
+    
+    #flex {
+        height: 200px; 
+        width: 10%;
+        padding-left: 3px;
+        padding-right: 15px;
+        display: flex;
+        align-items: center;
+        font-family: Trebuchet MS;
+        
+        border-top: 5px solid black;
+        border-bottom: 5px solid black;
+        
+    }
+    
+    
+    #searchSaveSummoner {
+        width: calc(100% - 281px - 38%);
+        height: 200px;
+        border: 5px solid black;
+        font-family: Trebuchet MS;
+    }
+    #searchAndSave{
+        padding-top: 10px;
+        padding-right: 0px;
+        float:right;
+        font-size: 16pt;
+        color: rgb(255, 255, 102);
+    }
+    #saveSummoner {
+        text-align: center;
+        direction: rtl;
+        padding-right: 10px;
+    }
