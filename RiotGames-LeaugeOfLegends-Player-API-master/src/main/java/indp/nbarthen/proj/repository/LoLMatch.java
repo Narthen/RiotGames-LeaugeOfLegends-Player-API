@@ -2,6 +2,7 @@ package indp.nbarthen.proj.repository;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,6 +20,7 @@ public class LoLMatch {
 	private String matchId;
 	private Vector<Participant> participants; //uses PUUID
 	private long gameDuration;
+	//Riot used Unix timestamp in MILISECONDS
 	private long gameEndTimestampUnix;
 	private String gameEndTimestamp;
 	private int queueId; 
@@ -80,8 +82,9 @@ public class LoLMatch {
 	//Gets date as "MM/dd/yy"
 	@JsonIgnore
 	public String getDate() {
-		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yy");
-        return formatter.format(TimeUnit.SECONDS.toMillis(gameEndTimestampUnix));
+		String date = new java.text.SimpleDateFormat("MM/dd/yyyy").format(new java.util.Date (gameEndTimestampUnix));
+		return date;
+
 	}
 	//Gets date as Days OR Hours OR Minutes Ago (Converts Unix timestamp to real date in the setter method)
 	public String getGameEndTimestamp() {

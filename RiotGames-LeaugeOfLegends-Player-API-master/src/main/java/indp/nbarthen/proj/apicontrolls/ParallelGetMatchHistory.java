@@ -84,8 +84,6 @@ public class ParallelGetMatchHistory {
 				match.setMatchId(gameRoot.path("metadata").path("matchId").asText());
 				match.setGameDuration(gameRoot.path("info").path("gameDuration").asLong());
 				
-				long endTimeStamp = gameRoot.path("info").path("gameEndTimestamp").asLong();
-				match.setGameEndTimestampUnix(endTimeStamp);
 				
 				
 				
@@ -99,6 +97,10 @@ public class ParallelGetMatchHistory {
 				
 				JsonNode info = gameRoot.get("info");
 				JsonNode players = info.get("participants");
+				
+				//used to find endGameTimestamp in Unix time (this will be added to gameCreation Unix time)
+				long timePlayed = players.get(0).get("timePlayed").asInt();
+				
 				//Loops through all 10 participants (summoners) in the Riot API. Sets needed values.
 				for (JsonNode player : players) {
 					//If current participant is the main summoner (save additional information).
@@ -134,9 +136,16 @@ public class ParallelGetMatchHistory {
 				   participant.setTotalMinionsKilled(player.get("totalMinionsKilled").asInt());
 				   //Add participant to the participants Vector
 				   participants.add(participant);
+				   
+				   if( player.get("timePlayed").asInt() > timePlayed) {
+					   timePlayed = player.get("timePlayed").asInt();
+				   }
 				}
 				//Add participants Vector to the current match
 				match.setParticipants(participants);
+				
+				long endTimeStamp = (gameRoot.path("info").path("gameStartTimestamp").asLong() + timePlayed);
+				match.setGameEndTimestampUnix(endTimeStamp);
 				
 				//Returns desired data for each match. (Does not exit parallellMatchHistory function). This is for task.add
 				return match;

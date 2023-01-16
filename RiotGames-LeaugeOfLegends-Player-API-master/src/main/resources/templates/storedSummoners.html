@@ -53,7 +53,17 @@
 			        <div id="dateDiv">[[${summoner.getMatchHistory().get(0).getDate()}]] <span id="hyphen">--&nbsp;</span></div>
 			        <div id="dateDiv">[[${summoner.getMatchHistory().get(summoner.getMatchHistory().size() - 1).getDate()}]]<span id="hyphen">&nbsp; --- &nbsp;</span></div>
 			        <div id="gamesDiv">Games: [[${summoner.getMatchHistoryList().size()}]] <span id="hyphen">&nbsp; --- &nbsp;</span></div>
-			        <div id="gamemodeDiv">Most: [[${summoner.getRecentMatchSummary.getMostPlayedMode()}]]</div>
+			        <div id="gamemodeDiv">Most: [[${summoner.getRecentMatchSummary.getMostPlayedMode()}]] &nbsp; &nbsp;</div>
+			        <div id="deleteText"> 
+						<form method="post" th:action="@{/deleteSummoner}">
+							<input type="hidden" name="accName" th:value="${summoner.getAccName()}"/>
+						    <input type="hidden" name="newestGameUnixTime" th:value="${summoner.getMatchHistory().get(0).getGameEndTimestampUnix()}"/>
+						    <input type="hidden"  name="oldestGameUnixTime" th:value="${summoner.getMatchHistory().get(summoner.getMatchHistory().size() - 1).getGameEndTimestampUnix()}"/>
+						    <input type="submit" value="Delete"/>
+						</form>
+						
+						
+					</div>
 			    </div>
 			    
 			   

@@ -96,7 +96,6 @@ public class MainController {
 		 			summoner = GetMatchHistory.matchHistory(summoner, getCurrMatchType(), true);
 		 		}
 		 		else if(getPreviousURL().contains("/storedSummoners")) {
-		 			System.out.println(" I triggered :D");
 		 			//Dont get summoners Info, its already stored. (User hit 'Go Back' from /storedSUmmoners)
 		 			summoner = getCurrSummoner();
 		 		}
@@ -175,7 +174,14 @@ public class MainController {
 			 return "redirect:/storedSummoners";
 	}
 	 
-	 
+	//Add summoner to local database (Stored-Summoners.json file)
+		 @PostMapping({"/deleteSummoner"})
+		 	public String deleteSummoner(@RequestParam String accName, @RequestParam long newestGameUnixTime, @RequestParam long oldestGameUnixTime) { 
+				//System.out.println("accName- " + accName + "  newest- " + newestGameUnixTime + "  oldest- " + oldestGameUnixTime);
+				StoreSummoner.deletePassedSummoner(accName, newestGameUnixTime, oldestGameUnixTime);
+				
+				 return "redirect:/storedSummoners";
+		} 
 	 
 	
 	 

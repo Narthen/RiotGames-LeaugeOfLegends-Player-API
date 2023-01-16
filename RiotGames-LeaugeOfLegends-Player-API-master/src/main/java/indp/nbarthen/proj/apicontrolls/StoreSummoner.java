@@ -7,8 +7,14 @@ import java.io.File;
 
 import indp.nbarthen.proj.repository.PlayerAcc;
 
+/* Contains Functions: 
+ * storeSummonerToFile(PlayerAcc summoner) - Added passed summoner to database / file.
+ * deletePassedSummoner(PlayerAcc delSummoner) - Summoner to be deleted from database / file.
+ */
+
 public class StoreSummoner {
-	//Reads the json provided to set the Summoner's Solo/Duo Rank information
+	
+	//Added passed summoner to database / file
 	public static void storeSummonerToFile(PlayerAcc summoner) {
 		
 		if(summoner.getAccId() != null) {
@@ -58,8 +64,41 @@ public class StoreSummoner {
 
 	}
 
-
-
+	
+	//Deletes passed summoner from database / file.
+	public static void deletePassedSummoner(String accName, long newestGameUnixTime, long oldestGameUnixTime) {
+		File file = new File("Stored-Summoners.json");	
+		
+		 ObjectMapper mapper = new ObjectMapper();
+	        try {
+	            List<PlayerAcc> existingSummoners = mapper.readValue(file,
+	                mapper.getTypeFactory().constructCollectionType(List.class, PlayerAcc.class));
+	            
+	            //removed desired summoner from the list
+	            for(PlayerAcc summ : existingSummoners) {
+	            	//Checks to see if summoner already exsists. Does this by checking if the names are equal. And if the first and last games' unix date.
+	            	if(summ.getAccName().contains(accName) 
+	            		&& summ.getMatchHistory().get(summ.getMatchHistory().size() - 1).getGameEndTimestampUnix() == oldestGameUnixTime
+	            		&& summ.getMatchHistory().get(0).getGameEndTimestampUnix() == newestGameUnixTime) 
+	            	{
+	            		existingSummoners.remove(summ);
+	            		break;
+	            	}
+	            }
+	            
+	            if(existingSummoners.isEmpty()) {
+	            	file.delete();
+	            }
+	            else {
+		            // Write the updated list to the file
+		            mapper.writeValue(file, existingSummoners);
+	            }
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+				
+				
+	}
 
 
 
