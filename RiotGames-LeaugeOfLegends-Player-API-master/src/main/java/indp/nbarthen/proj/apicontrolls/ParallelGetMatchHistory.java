@@ -108,7 +108,7 @@ public class ParallelGetMatchHistory {
 				    	match.setSummonerAccName(player.get("summonerName").asText());
 				    	match.setSummonerChampionId(player.get("championId").asInt());
 				    	match.setSummonerChampionName(player.get("championName").asText());
-				    	match.setSummonerChampionUrl(summoner.getCurrPatch());
+				    	match.setSummonerChampionUrl("http://ddragon.leagueoflegends.com/cdn/"+ summoner.getCurrPatch() +"/img/champion/"+ player.get("championName").asText() +".png");
 				    	match.setSummonerKills(player.get("kills").asInt());
 				    	match.setSummonerDeaths(player.get("deaths").asInt());
 				    	match.setSummonerAssists(player.get("assists").asInt());
@@ -128,7 +128,7 @@ public class ParallelGetMatchHistory {
 				   participant.setMapSide(player.get("teamId").asText());
 				   participant.setChampionId(player.get("championId").asInt());
 				   participant.setChampionName(player.get("championName").asText());
-				   participant.setChampionUrl(summoner.getCurrPatch());
+				   participant.setChampionUrl("http://ddragon.leagueoflegends.com/cdn/"+ summoner.getCurrPatch() +"/img/champion/"+ player.get("championName").asText() +".png");
 				   participant.setKills(player.get("kills").asInt());
 				   participant.setDeaths(player.get("deaths").asInt());
 				   participant.setAssists(player.get("assists").asInt());

@@ -41,9 +41,36 @@
     	display: flex; 
     	justify-content: space-between;
     }
+    
+    #back-button {
+    	width: 100px; /* increase the width of the form */
+	    height: 26px; /* increase the height of the form */
+	    background-color: rgb(0, 0, 56);
+	    font-size: 18px; /* increase the font-size of the text */
+	    color: rgb(255, 133, 51);
+    }
+    
+    
     #searchForm {
     	display: flex;
     }
+    
+   #searchInput {
+	    width: 70px; /* increase the width of the form */
+	    height: 26px; /* increase the height of the form */
+	    background-color: rgb(0, 0, 56);
+	    font-size: 18px; /* increase the font-size of the text */
+	    color: rgb(102, 255, 102);
+	}
+	#summonerName {
+		background-color: rgb(0, 0, 56);
+		width: 150px; /* increase the width of the form */
+	    height: 24px; /* increase the height of the form */
+	    font-size: 18px; /* increase the font-size of the text */
+	    color: rgb(102, 255, 102);
+	}
+    
+    
     #savedSummonersTitle {
     	text-align: center;
     	font-size: 30px;
@@ -68,6 +95,19 @@
     	margin-top: -3px;
     	
     }
+    
+    
+    #viewText {
+    	display: flex;
+	    position: absolute;
+    	left: 30px;
+    }
+    #deleteText {
+    	display: flex;
+	    position: absolute;
+    	right: 30px;
+    }
+    
     
     #nameDiv {
     	color: rgb(38, 74, 255);

@@ -163,8 +163,8 @@ public class LoLMatch {
 		return summonerChampionUrl;
 	}
 
-	public void setSummonerChampionUrl(String currPatch) {
-		this.summonerChampionUrl = "http://ddragon.leagueoflegends.com/cdn/"+ currPatch +"/img/champion/"+ summonerChampionName +".png";
+	public void setSummonerChampionUrl(String summonerChampionUrl) {
+		this.summonerChampionUrl = summonerChampionUrl;
 	}
 
 	public int getSummonerKills() {

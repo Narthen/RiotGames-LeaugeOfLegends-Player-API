@@ -74,9 +74,9 @@ public class StoreSummoner {
 	            List<PlayerAcc> existingSummoners = mapper.readValue(file,
 	                mapper.getTypeFactory().constructCollectionType(List.class, PlayerAcc.class));
 	            
-	            //removed desired summoner from the list
+	            //Removed desired summoner from the list
 	            for(PlayerAcc summ : existingSummoners) {
-	            	//Checks to see if summoner already exsists. Does this by checking if the names are equal. And if the first and last games' unix date.
+	            	//If current summ matches desired summoner
 	            	if(summ.getAccName().contains(accName) 
 	            		&& summ.getMatchHistory().get(summ.getMatchHistory().size() - 1).getGameEndTimestampUnix() == oldestGameUnixTime
 	            		&& summ.getMatchHistory().get(0).getGameEndTimestampUnix() == newestGameUnixTime) 
@@ -100,6 +100,37 @@ public class StoreSummoner {
 				
 	}
 
+	
+	//Finds the fetched summoner from database / file.
+		public static PlayerAcc fetchSelectedSummoner(String accName, long newestGameUnixTime, long oldestGameUnixTime) {
+			File file = new File("Stored-Summoners.json");	
+			
+			 ObjectMapper mapper = new ObjectMapper();
+		        try {
+		            List<PlayerAcc> existingSummoners = mapper.readValue(file,
+		                mapper.getTypeFactory().constructCollectionType(List.class, PlayerAcc.class));
+		            
+		            //Find desired summoner from the list
+		            for(PlayerAcc summ : existingSummoners) {
+		            	//If current summ matches desired summoner
+		            	if(summ.getAccName().contains(accName) 
+		            		&& summ.getMatchHistory().get(summ.getMatchHistory().size() - 1).getGameEndTimestampUnix() == oldestGameUnixTime
+		            		&& summ.getMatchHistory().get(0).getGameEndTimestampUnix() == newestGameUnixTime) 
+		            	{
+		            		return summ;
+		            		
+		            	}
+		            }
+		            
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+					
+			PlayerAcc summoner = new PlayerAcc();
+			//If summoner is not found, return empty summoner.
+			summoner.setAccId("Summoner not found");
+			return summoner;
+		}
 
 
 }

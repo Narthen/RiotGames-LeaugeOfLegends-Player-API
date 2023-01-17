@@ -33,12 +33,14 @@ public class MainController {
 	private String previousURL;
 	private PlayerAcc currSummoner;
 	private String currMatchType;
+	private String fetchSummError;
 	
 	public MainController(PlayerRepository playerRepository) {
 		this.playerRepository = playerRepository;
 		previousURL = "/";
 		currSummoner = new PlayerAcc();
 		currMatchType = "All";
+		fetchSummError = "none";
 	}
 	
 	 @RequestMapping({"/"})
@@ -152,7 +154,14 @@ public class MainController {
 		public String storedSummoners(Model model) {
 		 	Vector<PlayerAcc> allStoredAccs = GetStoredSummoners.getAllStoredSummoners();
 		 	
-		 	
+		 	String errorPopup = getFetchSummError();
+		 	if(!errorPopup.contains("none")) {
+		 		setFetchSummError("none");
+		 		model.addAttribute("popupError", errorPopup);
+		 	}
+		 	else if (getCurrSummoner().getApiError().contains("Error")) {
+		 		model.addAttribute("popupError", getCurrSummoner().getApiError());
+		 	}
 		 	
 		 	model.addAttribute("prevURL", getPreviousURL());
 		 	
@@ -172,17 +181,34 @@ public class MainController {
 				 StoreSummoner.storeSummonerToFile(summoner);
 			 }
 			 return "redirect:/storedSummoners";
-	}
+	  	}
 	 
-	//Add summoner to local database (Stored-Summoners.json file)
+	//Removes summoner from local database (Stored-Summoners.json file)
 		 @PostMapping({"/deleteSummoner"})
 		 	public String deleteSummoner(@RequestParam String accName, @RequestParam long newestGameUnixTime, @RequestParam long oldestGameUnixTime) { 
-				//System.out.println("accName- " + accName + "  newest- " + newestGameUnixTime + "  oldest- " + oldestGameUnixTime);
+				
 				StoreSummoner.deletePassedSummoner(accName, newestGameUnixTime, oldestGameUnixTime);
 				
-				 return "redirect:/storedSummoners";
-		} 
-	 
+				return "redirect:/storedSummoners";
+		 	} 
+	//Finds summoner from local database (Stored-Summoners.json file)
+		 @RequestMapping({"/storedSummoner/{summonerName}"})
+		 	public String fetchSummoner(@PathVariable("summonerName") String summonerName, @RequestParam String accName, @RequestParam long newestGameUnixTime, @RequestParam long oldestGameUnixTime, Model model) { 
+			 	
+			 	PlayerAcc storedSummoner = StoreSummoner.fetchSelectedSummoner(accName, newestGameUnixTime, oldestGameUnixTime);
+				if(storedSummoner.getAccId().contains("Summoner not found")) {
+					setFetchSummError("Error: Summoner not found. Retry or refresh page.");
+					return "redirect:/storedSummoners";
+				}
+			 	
+			 	
+			 	setPreviousURL("/storedSummoners");
+			 	
+			 	model.addAttribute("prevURL", getPreviousURL());
+			 	model.addAttribute("summoner", storedSummoner);
+			 	
+				return "storedSummoner";
+		 	} 
 	
 	 
 	 
@@ -211,6 +237,14 @@ public class MainController {
 
 	public void setCurrMatchType(String currMatchType) {
 		this.currMatchType = currMatchType;
+	}
+
+	public String getFetchSummError() {
+		return fetchSummError;
+	}
+
+	public void setFetchSummError(String fetchSummError) {
+		this.fetchSummError = fetchSummError;
 	}
 	 	
 	 

@@ -71,8 +71,8 @@ public class Participant {
 		return championUrl;
 	}
 
-	public void setChampionUrl(String currPatch) {
-		this.championUrl  ="http://ddragon.leagueoflegends.com/cdn/"+ currPatch +"/img/champion/"+ this.championName +".png";
+	public void setChampionUrl(String championUrl) {
+		this.championUrl  = championUrl;
 	}
 
 	public int getKills() {
