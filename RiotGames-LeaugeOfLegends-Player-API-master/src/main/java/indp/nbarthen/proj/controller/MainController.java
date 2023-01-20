@@ -5,6 +5,8 @@ import indp.nbarthen.proj.apicontrolls.*;
 import indp.nbarthen.proj.repository.LoLMatch;
 import indp.nbarthen.proj.repository.PlayerAcc;
 import indp.nbarthen.proj.repository.PlayerRepository;
+import jakarta.servlet.http.HttpServletRequest;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -33,6 +35,7 @@ public class MainController {
 	private String previousURL;
 	private PlayerAcc currSummoner;
 	private String currMatchType;
+	private String fetchInitialSummonerApiError;
 	private String fetchSummError;
 	
 	public MainController(PlayerRepository playerRepository) {
@@ -40,6 +43,7 @@ public class MainController {
 		previousURL = "/";
 		currSummoner = new PlayerAcc();
 		currMatchType = "All";
+		fetchInitialSummonerApiError = "none";
 		fetchSummError = "none";
 	}
 	
@@ -52,63 +56,82 @@ public class MainController {
 		 	summoner = GetCurrentPatch.currentPatch(summoner);
 		 	
 		 	//If user was redirected after Summoner Search. Show popup error on webpage
-		 	if(getCurrSummoner().getApiError().contains("Error")) {
-		 		summoner = getCurrSummoner();
-		 		popupError = summoner.getApiError();
+		 	if(getFetchInitialSummonerApiError().contains("Error")) {
+		 		popupError = getFetchInitialSummonerApiError();
+		 		setFetchInitialSummonerApiError("none");
 		 		model.addAttribute("summoner", summoner);
 		 		model.addAttribute("popupError", popupError);
-			 	model.addAttribute("prevURL", getPreviousURL());
-		 		summoner.setApiError("");
-		 		setCurrSummoner(summoner);
+			 	model.addAttribute("prevURL", getPreviousURL()); //	REMOVE
+		 		summoner.setApiError(""); //REMOVE
+		 		setCurrSummoner(summoner); //REMOVE
 		 		return "homePage";
 		 	}
 		 	
-		 	setPreviousURL("/");
+		 	setPreviousURL("/"); //REMOVE
 		 	model.addAttribute("summoner", summoner);
 		 	model.addAttribute("popupError", popupError);
-		 	model.addAttribute("prevURL", getPreviousURL());
+		 	model.addAttribute("prevURL", getPreviousURL()); //REMOVE
 		 	
 	        return "homePage";
 	    }
 	 
 	 @RequestMapping({"summoner/{summonerName}"})
-	    public String getSummoner(@PathVariable("summonerName") String summonerName, @RequestParam(value = "matchType", required = false) String matchType, @RequestParam(value = "loadMore", required = false) String loadMore, Model model) throws JsonMappingException, JsonProcessingException {
+	    public String getSummoner(@PathVariable("summonerName") String summonerName, @RequestParam(value = "matchType", required = false) String matchType, @RequestParam(value = "loadMore", required = false) String loadMore, @RequestParam(value = "summRandomId", required = false) String summUniqueId, HttpServletRequest request, Model model) throws JsonMappingException, JsonProcessingException {
 		 	
 		 	PlayerAcc summoner = new PlayerAcc();
 		 	String popupError = "none";
 		 	
+		 	
+		 	
+		 
 		 	//If just loading additional match history games OR filtering for game type OR catching previous redirect Error.
-		 	if(getCurrSummoner().getAccName().equals(summonerName)) {
-		 		summoner = getCurrSummoner();
-		 		
-		 		//If API does not return all information (was redirect + show popup).
+		 	if(summUniqueId != null && playerRepository.findById(summUniqueId).get().getAccName().equals(summonerName)) {
+		 		summoner = playerRepository.findById(summUniqueId).get();
+		 
+		 		//If API does not return all information (but summoner already exists (was redirect + show popup).
 			 	if(summoner.getApiError().contains("Error")) {
 			 		popupError = summoner.getApiError();
-			 		model.addAttribute("prevURL", getPreviousURL());
 			 		model.addAttribute("popupError", popupError);
 				 	model.addAttribute("summoner", summoner);
 				 	//Clear summoner's error msg for next request.
 				 	summoner.setApiError("");
-				 	setCurrSummoner(summoner);
+				 	playerRepository.save(summoner);
+				 	
 			        return "homePage";
 			 	}
 			 	
 		 		if(loadMore != null) {
 		 			//Just loading 10 more games
-		 			summoner = GetMatchHistory.matchHistory(summoner, getCurrMatchType(), true);
+		 			summoner = GetMatchHistory.matchHistory(summoner, summoner.getMatchType(), true);
 		 		}
-		 		else if(getPreviousURL().contains("/storedSummoners")) {
-		 			//Dont get summoners Info, its already stored. (User hit 'Go Back' from /storedSUmmoners)
-		 			summoner = getCurrSummoner();
-		 		}
-		 		else {
-		 			//Reloading 20 games of a specific queue
+		 		else if(!summoner.getMatchType().equals(matchType)) {
+		 			//Reloading 20 games of a specific queue (new matchType)
 		 			summoner = GetMatchHistory.matchHistory(summoner, matchType, false);
-		 			setCurrMatchType(matchType);
 		 		}
+		 		
+		 		//If API does not return all information for a existing summoner - redirect to previous page + show popup
+			 	if(summoner.getApiError().contains("Error")) {
+			 		playerRepository.save(summoner);
+			 		String urlOptionalParameters = request.getQueryString();
+			 		int index = urlOptionalParameters.indexOf("matchType=");
+			 		if(index != -1) {
+			 		    int endIndex = urlOptionalParameters.indexOf("&", index);
+			 		    if(endIndex == -1) {
+			 		        endIndex = urlOptionalParameters.length();
+			 		    }
+			 		   urlOptionalParameters = urlOptionalParameters.substring(0, index) + "matchType=" + summoner.getMatchType() + urlOptionalParameters.substring(endIndex);
+			 		}
+			 		String url = request.getRequestURL().toString() + "?" + urlOptionalParameters;
+			 		System.out.println("my url for redirect: " + url);
+			 		return "redirect:" + url;
+			 	}
+			 	summoner.setMatchType(matchType);
 		 	}
 		 	//If request is a completely new summoner
 		 	else {
+		 		if(matchType != null) {
+		 			summoner.setMatchType(matchType);
+		 		}
 			 	//Gets patch info from API + sets Icon URL
 			 	summoner = GetCurrentPatch.currentPatch(summoner);
 			 	
@@ -119,26 +142,24 @@ public class MainController {
 			 	summoner = GetRankInfo.rankInformation(summoner, summoner.getAccId());
 			 	
 			 	//GetMatchHistory.matchHistory calls all of the necessary APIs to get the matchHistory info
-			 	summoner = GetMatchHistory.matchHistory(summoner, matchType, false);
+			 	summoner = GetMatchHistory.matchHistory(summoner, summoner.getMatchType(), false);
 			 	
-			 	setCurrMatchType(matchType);
+			 	//If API does not return information for a new summoner - redirect to / + show popup
+			 	if(summoner.getApiError().contains("Error")) {
+			 		setFetchInitialSummonerApiError(summoner.getApiError());
+			 		return "redirect:/";
+			 	}
 		 	}
 		 	
-		 	//If API does not return information - redirect + show popup
-		 	if(summoner.getApiError().contains("Error")) {
-		 		setCurrSummoner(summoner);
-		 		return "redirect:" +  getPreviousURL();
-		 	}
 		 	
 		 	//Set / Calc recent match summary info.
 		 	summoner.setRecentMatchSummary(CalcRecentMatchInfo.calcRecentMatchInfo(summoner));
 		 	//Set / Calc recent champion stats.
 		 	summoner.setRecentChampions(CalcRecentChampionInfo.calcRecentChampionInfo(summoner));
 		 	
-		 
-		 	setCurrSummoner(summoner);
 		 	
-		 	model.addAttribute("prevURL", getPreviousURL());
+		 	playerRepository.save(summoner);
+		 	
 		 	model.addAttribute("summoner", summoner);
 		 
 		 	
@@ -155,15 +176,11 @@ public class MainController {
 		 	Vector<PlayerAcc> allStoredAccs = GetStoredSummoners.getAllStoredSummoners();
 		 	
 		 	String errorPopup = getFetchSummError();
+		 	//User clicked 'view' on a summoner, but Error occurred (summoner does not exist in database) ( redirected from /storedSummoner/{summonerName} )
 		 	if(!errorPopup.contains("none")) {
 		 		setFetchSummError("none");
 		 		model.addAttribute("popupError", errorPopup);
 		 	}
-		 	else if (getCurrSummoner().getApiError().contains("Error")) {
-		 		model.addAttribute("popupError", getCurrSummoner().getApiError());
-		 	}
-		 	
-		 	model.addAttribute("prevURL", getPreviousURL());
 		 	
 		 	model.addAttribute("allSummoners", allStoredAccs);
 		 
@@ -237,6 +254,14 @@ public class MainController {
 
 	public void setCurrMatchType(String currMatchType) {
 		this.currMatchType = currMatchType;
+	}
+
+	public String getFetchInitialSummonerApiError() {
+		return fetchInitialSummonerApiError;
+	}
+
+	public void setFetchInitialSummonerApiError(String fetchInitialSummonerApiError) {
+		this.fetchInitialSummonerApiError = fetchInitialSummonerApiError;
 	}
 
 	public String getFetchSummError() {

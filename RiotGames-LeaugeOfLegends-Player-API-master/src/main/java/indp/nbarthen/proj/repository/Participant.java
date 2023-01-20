@@ -4,12 +4,16 @@ import java.text.DecimalFormat;
 import java.util.Vector;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 //Summoner in a person's game.
 @Entity
 public class Participant {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	private String puuid; //puuid
 	private String accName; //summonerName
 	private String mapSide; //teamId

@@ -1,9 +1,18 @@
 package indp.nbarthen.proj.repository;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
+import java.util.List;
+import java.util.UUID;
 import java.util.Vector;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -11,6 +20,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class PlayerAcc {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	@Column(insertable=false, updatable=false)
 	private String accId;
 	//summonersId is synonymous with Riots naming of: 'encryptedAccountId' and 'id?'
 	private String summonerId;
@@ -24,15 +36,20 @@ public class PlayerAcc {
 	private int summonerLevel;
 	private boolean isSoloRanked;
 	private boolean isFlexRanked;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private SummonerRank soloRank;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private SummonerRank flexRank;
-	@OneToOne
+	
+	private String matchType;
+	@Embedded
 	private RecentMatchSummary recentMatchSummary;
+	@Column(length = 10000)
 	private Vector<String> matchHistoryList;
-	private Vector<LoLMatch> matchHistory;
-	private Vector<Champion> recentChampions;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<LoLMatch> matchHistory;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Champion> recentChampions;
 	
 	private String apiError;
 	
@@ -42,12 +59,23 @@ public class PlayerAcc {
 		summonerLevel = 0;
 		soloRank = new SummonerRank("Solo/Duo");
 		flexRank = new SummonerRank("Flex");
+		matchType = "All";
 		recentMatchSummary = new RecentMatchSummary();
 		matchHistoryList = new Vector<String>();
 		matchHistory = new Vector<LoLMatch>();
 		//Only saving the user's top 12 most played champions. 
 		recentChampions = new Vector<Champion>();
 		apiError = "";
+	}
+
+
+	public long getUniqueId() {
+		return id;
+	}
+
+
+	public void setUniqueId(long uniqueId) {
+		this.id = uniqueId;
 	}
 
 
@@ -135,7 +163,7 @@ public class PlayerAcc {
 	//soloRank & flexRank Getter/Setter Methods 
 	
 		
-		public boolean isSoloRanked() {
+	public boolean isSoloRanked() {
 		return isSoloRanked;
 	}
 
@@ -154,185 +182,35 @@ public class PlayerAcc {
 		this.isFlexRanked = isFlexRanked;
 	}
 
-
-		//get for soloRank
-	 	public String getSoloRankAccId() {
-	        return soloRank.getAccId();
-	    }
-
-	    public String getSoloRankLeagueId() {
-	        return soloRank.getLeagueId();
-	    }
-
-	    public String getSoloRankQueueType() {
-	        return soloRank.getQueueType();
-	    }
-
-	    public String getSoloRankTier() {
-	        return soloRank.getTier();
-	    }
-
-	    public String getSoloRankRank() {
-	        return soloRank.getRank();
-	    }
-
-	    public String getSoloRankSummonerId() {
-	        return soloRank.getSummonerId();
-	    }
-
-	    public String getSoloRankSummonerName() {
-	        return soloRank.getSummonerName();
-	    }
-
-	    public int getSoloRankLeaguePoints() {
-	        return soloRank.getLeaguePoints();
-	    }
-
-	    public int getSoloRankWins() {
-	        return soloRank.getWins();
-	    }
-
-	    public int getSoloRankLosses() {
-	        return soloRank.getLosses();
-	    }
-	    @JsonIgnore
-	    public int getSoloRankWinRate() {
-	        return soloRank.getWinRate();
-	    }
-	    
-	    //getting for flexRank
-	    public String getFlexRankAccId() {
-	        return flexRank.getAccId();
-	    }
-
-	    public String getFlexRankLeagueId() {
-	        return flexRank.getLeagueId();
-	    }
-
-	    public String getFlexRankQueueType() {
-	        return flexRank.getQueueType();
-	    }
-
-	    public String getFlexRankTier() {
-	        return flexRank.getTier();
-	    }
-
-	    public String getFlexRankRank() {
-	        return flexRank.getRank();
-	    }
-
-	    public String getFlexRankSummonerId() {
-	        return flexRank.getSummonerId();
-	    }
-
-	    public String getFlexRankSummonerName() {
-	        return flexRank.getSummonerName();
-	    }
-
-	    public int getFlexRankLeaguePoints() {
-	        return flexRank.getLeaguePoints();
-	    }
-
-	    public int getFlexRankWins() {
-	        return flexRank.getWins();
-	    }
-
-	    public int getFlexRankLosses() {
-	        return flexRank.getLosses();
-	    }
-	    
-	    @JsonIgnore
-	    public int getFlexRankWinRate() {
-	        return flexRank.getWinRate();
-	    }
-	    
-	    
-	    //setters for soloRank
-	    public void setSoloRankAccId(String accId) {
-	        soloRank.setAccId(accId);
-	    }
-
-	    public void setSoloRankLeagueId(String leagueId) {
-	        soloRank.setLeagueId(leagueId);
-	    }
-
-	    public void setSoloRankQueueType(String queueType) {
-	        soloRank.setQueueType(queueType);
-	    }
-
-	    public void setSoloRankTier(String tier) {
-	        soloRank.setTier(tier);
-	    }
-
-	    public void setSoloRankRank(String rank) {
-	        soloRank.setRank(rank);
-	    }
-
-	    public void setSoloRankSummonerId(String summonerId) {
-	        soloRank.setSummonerId(summonerId);
-	    }
-
-	    public void setSoloRankSummonerName(String summonerName) {
-	        soloRank.setSummonerName(summonerName);
-	    }
-
-	    public void setSoloRankLeaguePoints(int leaguePoints) {
-	        soloRank.setLeaguePoints(leaguePoints);
-	    }
-
-	    public void setSoloRankWins(int wins) {
-	        soloRank.setWins(wins);
-	    }
-
-	    public void setSoloRankLosses(int losses) {
-	        soloRank.setLosses(losses);
-	    }
-	    
-	    
-	    //setters for flexRank
-	    public void setFlexRankAccId(String accId) {
-	        flexRank.setAccId(accId);
-	    }
-
-	    public void setFlexRankLeagueId(String leagueId) {
-	        flexRank.setLeagueId(leagueId);
-	    }
-
-	    public void setFlexRankQueueType(String queueType) {
-	        flexRank.setQueueType(queueType);
-	    }
-
-	    public void setFlexRankTier(String tier) {
-	        flexRank.setTier(tier);
-	    }
-
-	    public void setFlexRankRank(String rank) {
-	        flexRank.setRank(rank);
-	    }
-	    public void setFlexRankSummonerId(String summonerId) {
-	        flexRank.setSummonerId(summonerId);
-	    }
-
-	    public void setFlexRankSummonerName(String summonerName) {
-	        flexRank.setSummonerName(summonerName);
-	    }
-
-	    public void setFlexRankLeaguePoints(int leaguePoints) {
-	        flexRank.setLeaguePoints(leaguePoints);
-	    }
-
-	    public void setFlexRankWins(int wins) {
-	        flexRank.setWins(wins);
-	    }
-
-	    public void setFlexRankLosses(int losses) {
-	        flexRank.setLosses(losses);
-	    }
-
-	    // END SOLO / FLEX  getter/setters
+	    //  SOLO / FLEX  getter/setters
+	public void setSoloRank(SummonerRank soloRank) {
+		this.soloRank = soloRank;
+	}
+	public void setFlexRank(SummonerRank flexRank) {
+		this.flexRank = flexRank;
+	}
+	
+	public SummonerRank getSoloRank() {
+		return soloRank;
+	}
+	public SummonerRank getFlexRank() {
+		return flexRank;
+	}
+	
+	
 	    
 	    //Start MATCH HISTORY getter/setters
 	    
+		public String getMatchType() {
+		return matchType;
+	}
+
+
+	public void setMatchType(String matchType) {
+		this.matchType = matchType;
+	}
+
+
 		public RecentMatchSummary getRecentMatchSummary() {
 			return recentMatchSummary;
 		}
@@ -351,17 +229,17 @@ public class PlayerAcc {
 		}
 
 
-		public Vector<LoLMatch> getMatchHistory() {
+		public List<LoLMatch> getMatchHistory() {
 			return matchHistory;
 		}
 
 
-		public void setMatchHistory(Vector<LoLMatch> matchHistory) {
+		public void setMatchHistory(List<LoLMatch> matchHistory) {
 			this.matchHistory = matchHistory;
 		}
 
 
-		public Vector<Champion> getRecentChampions() {
+		public List<Champion> getRecentChampions() {
 			return recentChampions;
 		}
 

@@ -2,12 +2,18 @@ package indp.nbarthen.proj.repository;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class SummonerRank {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
 	private String accId;
 	private String leagueId;
 	private String queueType;
@@ -57,7 +63,7 @@ public class SummonerRank {
 	}
 	
 	public String getAccId() {
-		return leagueId;
+		return accId;
 	}
 	public void setAccId(String accId) {
 		this.accId = accId;

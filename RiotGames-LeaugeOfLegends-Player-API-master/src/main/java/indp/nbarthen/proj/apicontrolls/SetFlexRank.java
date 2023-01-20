@@ -11,23 +11,26 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import indp.nbarthen.proj.repository.PlayerAcc;
+import indp.nbarthen.proj.repository.SummonerRank;
 
 public class SetFlexRank {
 	//Reads the json provided to set the Summoner's Flex Rank information
 	
 	public static PlayerAcc setFlexRankInfo(PlayerAcc summoner, String accId, JsonNode rankInfoRoot, int index) {
-		summoner.setFlexRankAccId(accId);
-		summoner.setFlexRankQueueType("Flex");
-		summoner.setFlexRankLeagueId(rankInfoRoot.get(index).get("leagueId").asText());	
-		summoner.setFlexRankTier(rankInfoRoot.get(index).get("tier").asText());	
-		summoner.setFlexRankRank(rankInfoRoot.get(index).get("rank").asText());	
-		summoner.setFlexRankSummonerId(rankInfoRoot.get(index).get("summonerId").asText());		
-		summoner.setFlexRankSummonerName(rankInfoRoot.get(index).get("summonerName").asText());	
-		summoner.setFlexRankLeaguePoints(rankInfoRoot.get(index).get("leaguePoints").asInt());
-		summoner.setFlexRankWins(rankInfoRoot.get(index).get("wins").asInt());
-		summoner.setFlexRankLosses(rankInfoRoot.get(index).get("losses").asInt());	
-		summoner.setFlexRankSummonerId(rankInfoRoot.get(index).get("summonerId").asText());
-				
+		SummonerRank flexInfo = new SummonerRank();
+		flexInfo.setAccId(accId);
+		flexInfo.setQueueType("Flex");
+		flexInfo.setLeagueId(rankInfoRoot.get(index).get("leagueId").asText());	
+		flexInfo.setTier(rankInfoRoot.get(index).get("tier").asText());	
+		flexInfo.setRank(rankInfoRoot.get(index).get("rank").asText());	
+		flexInfo.setSummonerId(rankInfoRoot.get(index).get("summonerId").asText());		
+		flexInfo.setSummonerName(rankInfoRoot.get(index).get("summonerName").asText());	
+		flexInfo.setLeaguePoints(rankInfoRoot.get(index).get("leaguePoints").asInt());
+		flexInfo.setWins(rankInfoRoot.get(index).get("wins").asInt());
+		flexInfo.setLosses(rankInfoRoot.get(index).get("losses").asInt());	
+		
+		summoner.setFlexRank(flexInfo);	
+		
 		return summoner;
 
 	}

@@ -6,19 +6,30 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class LoLMatch {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
 	private String matchId;
-	private Vector<Participant> participants; //uses PUUID
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Participant> participants; //uses PUUID
 	private long gameDuration;
 	//Riot used Unix timestamp in MILISECONDS
 	private long gameEndTimestampUnix;
@@ -55,7 +66,7 @@ public class LoLMatch {
 		this.matchId = matchId;
 	}
 
-	public Vector<Participant> getParticipants() {
+	public List<Participant> getParticipants() {
 		return participants;
 	}
 

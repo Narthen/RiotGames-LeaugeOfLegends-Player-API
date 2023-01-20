@@ -2,13 +2,21 @@ package indp.nbarthen.proj.repository;
 
 import java.util.Vector;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Champion {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
 	private String accId;
+	@Column(length = 50000)
 	private Vector<String> matchIds; 
 	private int summonerChampionId; //championId
 	private String summonerChampionName; //championName

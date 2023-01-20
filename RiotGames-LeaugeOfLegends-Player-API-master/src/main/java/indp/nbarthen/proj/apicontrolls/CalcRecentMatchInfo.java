@@ -161,7 +161,6 @@ public class CalcRecentMatchInfo {
 			summary.setKda( strAvgKills + " - " + strAvgDeaths + " - " + strAvgAssists );
 			summary.setKd( strAvgRoundedKd );
 		}
-		summary.setAccId(summoner.getAccId());
 		
 		
 		return summary;
