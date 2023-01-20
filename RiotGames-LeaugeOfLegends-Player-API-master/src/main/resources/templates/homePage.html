@@ -60,18 +60,18 @@
             </div>
            
             <div id="rankIcon" class="column" >
-                <img id="rankImg" th:src="'/rankImages/'+ ${summoner.getSoloRankTier() +'.png'}" alt="RankIcon">
+                <img id="rankImg" th:src="'/rankImages/'+ ${summoner.getSoloRank().getTier() +'.png'}" alt="RankIcon">
             </div>
            
             <div id="rank" class="column" >
                 
                 <div id="rankText">
                   <b>
-                    <span id="rankTextMode" th:text="${summoner.getSoloRankQueueType() + ':'}"></span> <br>
-                    <span th:text="${summoner.getSoloRankTier() + ' ' + summoner.getSoloRankRank()}"></span> <br>
-                    <span th:text="'LP: ' + ${summoner.getSoloRankLeaguePoints() + 'lp'}"> </span><br> <br>
-                    <span id="wins" th:text="${summoner.getSoloRankWins() + ' W'}"></span> - <span id="losses" th:text="${summoner.getSoloRankLosses() + ' L'}"></span> <br>
-                    <span id="winPer" th:text="'Win %: ' + ${summoner.getSoloRankWinRate() + '%'}"></span>
+                    <span id="rankTextMode" th:text="${summoner.getSoloRank().getQueueType() + ':'}"></span> <br>
+                    <span th:text="${summoner.getSoloRank().getTier() + ' ' + summoner.getSoloRank().getRank()}"></span> <br>
+                    <span th:text="'LP: ' + ${summoner.getSoloRank().getLeaguePoints() + 'lp'}"> </span><br> <br>
+                    <span id="wins" th:text="${summoner.getSoloRank().getWins() + ' W'}"></span> - <span id="losses" th:text="${summoner.getSoloRank().getLosses() + ' L'}"></span> <br>
+                    <span id="winPer" th:text="'Win %: ' + ${summoner.getSoloRank().getWinRate() + '%'}"></span>
                   </b>
                 </div>
                 
@@ -79,18 +79,18 @@
             
             <div id="flexIcon" class="column" >
                 
-                <img id="rankImg" th:src="'/rankImages/'+ ${summoner.getFlexRankTier() +'.png'}" alt="RankIcon">
+                <img id="rankImg" th:src="'/rankImages/'+ ${summoner.getFlexRank().getTier() +'.png'}" alt="RankIcon">
             </div>
            
             <div id="flex" class="column" >
                 
                 <div id="rankText">
                   <b>
-                    <span id="rankTextMode" th:text="${summoner.getFlexRankQueueType() + ':'}"></span> <br>
-                    <span th:text="${summoner.getFlexRankTier() + ' ' + summoner.getFlexRankRank()}"></span> <br>
-                    <span th:text="'LP: ' + ${summoner.getFlexRankLeaguePoints() + 'lp'}"> </span><br> <br>
-                    <span id="wins" th:text="${summoner.getFlexRankWins() + ' W'}"></span> - <span id="losses" th:text="${summoner.getFlexRankLosses() + ' L'}"></span> <br>
-                    <span id="winPer" th:text="'Win %: ' + ${summoner.getFlexRankWinRate() + '%'}"></span>
+                    <span id="rankTextMode" th:text="${summoner.getFlexRank().getQueueType() + ':'}"></span> <br>
+                    <span th:text="${summoner.getFlexRank().getTier() + ' ' + summoner.getFlexRank().getRank()}"></span> <br>
+                    <span th:text="'LP: ' + ${summoner.getFlexRank().getLeaguePoints() + 'lp'}"> </span><br> <br>
+                    <span id="wins" th:text="${summoner.getFlexRank().getWins() + ' W'}"></span> - <span id="losses" th:text="${summoner.getFlexRank().getLosses() + ' L'}"></span> <br>
+                    <span id="winPer" th:text="'Win %: ' + ${summoner.getFlexRank().getWinRate() + '%'}"></span>
                   </b>
                 </div>
                 
@@ -212,6 +212,7 @@
         <div id="matchHistoryFilter">
             <div>
             	<form id="changeMatchType" method="get" th:action="@{/summoner/__${summoner.getAccName()}__}">
+            		<input type="hidden" th:name="summRandomId" th:value="${summoner.getUniqueId()}"/>
 	                <select id="matchHistSelect" th:name="matchType">
 	                  <option value="All">All</option>
 	                  <option value="Blind">Blind</option>
@@ -286,6 +287,7 @@
            <div id="loadMoreGames">
            		<form id="loadMoreGamesForm" method="get" th:action="@{/summoner/__${summoner.getAccName()}__}">
             		<input type="hidden" th:name="loadMore" value="Load More Games" />
+            		<input type="hidden" th:name="summRandomId" th:value="${summoner.getUniqueId()}"/>
             		<select id="mirrorSelect" th:name="matchType"  style="display: none;">
 					      <option>All</option>
 					      <option>Blind</option>
@@ -299,11 +301,7 @@
             </div>  
             
         </div>
-        	<script th:inline="javascript">
-			  window.onpopstate = function(event) {
-			    window.location = [[${prevURL}]];
-			  }
-			</script>
+        	
 			<script src="/disclaimerDropdown.js"></script>
 			<script src="/hideSaveSummoner.js"></script>
 			<script src="/getSummonerPageURL.js"></script>

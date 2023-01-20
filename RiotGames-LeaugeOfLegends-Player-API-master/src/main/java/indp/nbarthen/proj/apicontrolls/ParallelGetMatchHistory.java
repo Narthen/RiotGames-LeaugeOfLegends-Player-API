@@ -169,7 +169,7 @@ public class ParallelGetMatchHistory {
 			
 			//Save the matches Vector to the summoners match history
 			if(loadMore == true) {
-				Vector<LoLMatch> allMatches = new Vector<LoLMatch>();
+				List<LoLMatch> allMatches = new Vector<LoLMatch>();
 				allMatches = summoner.getMatchHistory();
 				allMatches.addAll(matches);
 				summoner.setMatchHistory(allMatches);

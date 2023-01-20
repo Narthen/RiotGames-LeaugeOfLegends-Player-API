@@ -23,7 +23,7 @@
 		    <div id="backAndSearch">
 		    	<span id="popup" th:text="${popupError}" style="display: none;"></span>
 		     	
-		     	<button id="back-button" onclick="location.href=[[${prevURL}]]">Go Back</button>
+		     	<button id="back-button" onclick="location.href=/">Go Back</button>
     	
 			    <div id="searchForm">
 			    
@@ -80,18 +80,8 @@
     
 	<script src="/getSummonerPageURL.js"></script>
 	<script src="/invalidSummonerPopup.js"></script>
-	<script th:inline="javascript">
-			  window.onpopstate = function(event) {
-			    window.location = [[${prevURL}]];
-			  }
-	</script>
-	<script>
-	    var prevURL = "[[${prevURL}]]";
-	    var button = document.getElementById("back-button");
-	    button.onclick = function() {
-	        location.href = prevURL;
-	    }
-	</script>
+
+	
 	
 </body>
 </html>

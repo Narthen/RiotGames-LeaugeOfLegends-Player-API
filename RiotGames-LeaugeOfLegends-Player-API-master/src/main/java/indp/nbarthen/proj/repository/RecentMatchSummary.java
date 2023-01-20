@@ -3,12 +3,14 @@ package indp.nbarthen.proj.repository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
+
 public class RecentMatchSummary {
-	@Id
-	private String accId;
+
+	
 	private int wins;
 	private int losses;
 	private String winRate;
@@ -22,7 +24,6 @@ public class RecentMatchSummary {
 	private int otherGames;
 	
 	public RecentMatchSummary() {
-		accId= "";
 		wins = 0;
 		losses = 0;
 		winRate = "0";
@@ -35,14 +36,7 @@ public class RecentMatchSummary {
 		aramGames = 0;
 		otherGames = 0;
 	}
-	
-	public String getAccId() {
-		return accId;
-	}
 
-	public void setAccId(String accId) {
-		this.accId = accId;
-	}
 
 	public int getWins() {
 		return wins;
