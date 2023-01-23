@@ -1,0 +1,140 @@
+@charset "ISO-8859-1";
+
+	html, body { 
+        margin: 0; 
+        padding: 0; 
+        height: 100%; 
+        width: 100%; 
+        background-image: url('http://lol-stats.net/uploads/X0geMjIXBEZOVO5U7CvrqJW3shfN1NaI57cmgyxZ.jpeg'); 
+        background-size: cover;
+        transform: scale(1.0);
+    }
+    header {
+        padding: 20px;
+    }
+    
+    #backgr {
+        position: absolute;
+        height: 100%; 
+        
+    }
+    
+   	#disclaimer {
+		background-color: rgb(0, 57, 142);
+		border-bottom: 5px solid black;
+		
+	}
+	 #disclaimerButtonDiv {
+         display: flex;
+         align-items: center;
+         font-family: Trebuchet MS;
+         color: rgb(255, 77, 77);
+         font-size: 15pt;
+         padding-top: 3px;
+         padding-bottom: 3px;
+         padding-left: 5px;
+    }
+      
+    .dropdown-content-Disclaimer {
+      position: relative; 
+      z-index: 1;  /* make sure the content is above other elements on the page */
+      display: inline;  
+      padding-bottom: 5px;
+      padding-left: 10px;
+    }
+    
+	.disclaimerContent {
+		padding-left: 30px;
+        font-family: Trebuchet MS;
+        color: white;
+    }
+    .dropdown-button {
+      display: block; /* display the button as an inline block */
+      cursor: pointer;       /* change the cursor to a pointer when hovering over the button */
+      font-size : 30px; 
+      width: 30px; 
+      height: 25px;
+      color: white;
+      background-color: transparent;
+      border-color: transparent;
+      position: relative;
+    }
+    
+    /* CSS for the dropdown button when hovering or focusing */
+    .dropdown-button:hover {
+      background-color: green; 
+    }
+    
+	#riotLink {
+		color: rgb(51, 204, 51);
+	}
+	#JibberJabberNotice {
+		color: rgb(255, 187, 51);
+	}
+   
+    #searchTextarea {
+        min-height: 600px; 
+        max-height: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        min-width: 600px;
+        max-width: 60%;
+        
+        transform: scale(1.0);
+        
+        background-image: url('https://rare-gallery.com/mocahbig/395593-legends-of-runeterra-blue-sentinel-4k-pc-wallpaper.jpg'); ;
+        background-size: cover;
+         background-position: center center;
+         
+        border: 8px solid black;
+        font-family: Trebuchet MS;
+    }
+    
+    
+  	#seeStored {
+  		padding-top: 5px;
+    	padding-right: 5px;
+    	float: right;
+	}
+	#seeStored form {
+	    width: 300px; /* increase the width of the form */
+	    height: 40px; /* increase the height of the form */
+	}
+	#seeStored input {
+	    width: 100%; /* set the width of the input to 100% to fill the form */
+	    height: 100%; /* set the height of the input to 100% to fill the form */
+	    font-size: 30px; /* increase the font-size of the text */
+	    background-color: rgb(0, 0, 56);
+	    color: rgb(255, 133, 51);
+	}
+    
+    #searchSumm {
+    	position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translateX(-50%) translateY(-50%);
+	    
+	    white-space: nowrap;
+	    
+	}
+	
+	#searchInput {
+	    background-color: rgb(0, 0, 56);
+	    color: rgb(102, 255, 102);
+	    
+	    width: 140px !important; /* increase the width of the form */
+	    height: 47px !important; /* increase the height of the form */
+	    font-size: 35px !important; /* increase the font-size of the text */
+	}
+    
+    #summonerName {
+		background-color: rgb(0, 0, 56);
+	    color: rgb(102, 255, 102);
+	    font-size: 35px;
+	    
+	    width: 500px !important; /* increase the width of the form */
+	    height: 40px !important; /* increase the height of the form */
+	    font-size: 35px !important; /* increase the font-size of the text */
+	}
+    
+    

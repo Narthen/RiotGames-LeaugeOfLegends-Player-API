@@ -86,14 +86,14 @@
         align-items: center; 
         justify-content: center; 
         padding-top: 10px;
-        font-size: 22px;	
+        font-size: 18px;	
         white-space: nowrap;
     }
     #matchHistorygame-SummonerStats {
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 10px;
-        width: 100px;
+        width: 170px;
         height: 145px;
         max-height: 145px;
         display: flex;
@@ -121,6 +121,8 @@
         margin: 0 auto;
         margin-left: auto; 
         margin-right: auto; 
+        position: relative;
+    	top: 4px;
     }
     #matchHistorygame-PlayersInGame {
         display: inline-block;
@@ -132,23 +134,39 @@
         text-align: right;
         padding-right: 10px;
         padding-left: 2px;
+        padding-top: 10px;
         justify-content: space-between;
+        
+        display: grid;
+	    grid-template-columns: 1fr 1fr;
+	    grid-template-areas: 
+	      "team1 team2";
+	      
+        
     }
     #matchHistorygame-PlayersInGame-Stats {
         font-size: 15px;
         color: blue;
+        text-align: right;
+        float: right;
     }
     #matchHistorygame-PlayersInGame-Team1 {
         display: inline-block;
-        line-height: 27px;
-        padding-right: 5px;
+        line-height: 24px;
+        padding-right: 10px;
         text-align: left;
         border-right: 3px solid black;
+          grid-area: team1;
+        padding-left: 10px;
+        
     }
     #matchHistorygame-PlayersInGame-Team2 {
         display: inline-block;
-        line-height: 27px;
+        line-height: 24px;
+        grid-area: team2;
+        float: left;
         text-align: left;
+        padding-left: 10px;
     }
     
     #loadMoreGames {

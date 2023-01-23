@@ -22,7 +22,6 @@ public class PlayerAcc {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	@Column(insertable=false, updatable=false)
 	private String accId;
 	//summonersId is synonymous with Riots naming of: 'encryptedAccountId' and 'id?'
 	private String summonerId;

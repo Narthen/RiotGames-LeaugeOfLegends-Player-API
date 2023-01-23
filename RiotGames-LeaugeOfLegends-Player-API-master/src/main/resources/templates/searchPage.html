@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="ISO-8859-1">
+<title>LoL Account Info</title>
+
+<link rel="stylesheet" href="/cssStyles/background.css">
+<link rel="stylesheet" href="/cssStyles/searchPage.css">
+
+
+
+
+</head>
+<body>
+     <div id="backgr">
+     </div>     
+    <div>
+        <br>
+    </div>
+    <div id="searchTextarea">
+    
+        <div id="disclaimer">
+        
+            <div class="dropdown-container-Disclaimer">
+              <!-- HTML for the dropdown button -->
+                <div id="disclaimerButtonDiv"> 
+                    <button class="dropdown-button" id="toggleDisclaimerButton"> ^ </button>
+                     &nbsp; *Notice* - GitHub/New Users  
+                </div>
+                <!-- HTML for the dropdown content -->
+                <div class="dropdown-content-Disclaimer" id="disclaimerContent">
+                
+                    <div class="disclaimerContent" >
+                     	If you downloaded my project off of GitHub, you will need to add your own api key for the project to work. <br>
+                     	<b>Getting your API Key:</b> you can generate your own api key by going to this link - <a id="riotLink" href="https://developer.riotgames.com" target="_blank">https://developer.riotgames.com</a>
+                     	<br><br>  <b>On Eclipse: </b> Right click > New > File > Name: '.env' <br>
+						In the env file you will put your api key in this format. 'API_KEY=<i>yourkey</i>' 
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Example: API_KEY=DFSGHJK-SDFGJKDFS-dgdfhgdh13
+						<br>
+						<br> <span id="JibberJabberNotice"><i>This project (LoL-Player-API) was created under Riot Games' "Legal Jibber Jabber" policy using assets owned by Riot Games.  
+						     <br> Riot Games does not endorse or sponsor this project.</i> </span>
+					</div>
+                    
+                    
+                </div>
+            </div>
+        </div>     
+        
+        <div id="seeStored">
+                    	<form method="post" th:action="@{/storedSummoners}">
+                            <input type="submit" value="Stored Summoners" />
+                        </form>
+                    
+        </div>
+        
+        <div id="searchSummDivContainer">
+       		<div id="searchSumm">
+	                    <form id="getSummoner" method="get" th:action="@{/summoner}">
+						   <input id="searchInput" type="submit" value="Search" />
+						   <input type="text" id="summonerName" placeholder=" SummonerName" size="15" style="height:20px; font-size:11pt;" required pattern=".*\S.*"/>
+							<select id="mirrorSelect" th:name="matchType"  style="display: none;">
+						      <option>All</option>
+						      <option>Blind</option>
+						      <option>Draft</option>
+						      <option>Ranked</option>
+						      <option>Flex</option>
+						      <option>ARAM</option>
+						    </select>
+						</form>
+           </div>
+       
+       
+       <span id="popup" th:text="${popupError}" style="display: none;"></span>
+       
+       
+       </div>
+  
+			<script src="/disclaimerDropdown.js"></script>
+			<script src="/hideSaveSummoner.js"></script>
+			<script src="/getSummonerPageURL.js"></script>
+        	<script src="/getSummonerPageURL.js"></script>
+        	<script src="/invalidSummonerPopup.js"></script>
+        	
+           
+  			
+  			
+        	<script src="/checkNameAndSubmit.js"></script>
+          	<script src="/loadMoreGames.js"></script>
+    </div>    
+    
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
