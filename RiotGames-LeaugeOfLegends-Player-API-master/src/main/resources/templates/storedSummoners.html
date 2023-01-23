@@ -23,7 +23,7 @@
 		    <div id="backAndSearch">
 		    	<span id="popup" th:text="${popupError}" style="display: none;"></span>
 		     	
-		     	<button id="back-button" onclick="location.href=/">Go Back</button>
+    			<button id="back-button" onclick="window.location.href='/'" class="btn btn-secondary">Home</button>
     	
 			    <div id="searchForm">
 			    
@@ -48,6 +48,7 @@
 		    
 		    <div id="summonerInfoParent">
 			    <div id="summonerInfo" th:each="summoner : ${allSummoners}">
+			    <div id="accInfoContainer">
 			    	<div id="viewText"> 
 						<form method="post" th:action="@{/storedSummoner/__${summoner.getAccName()}__}">
 							<input type="hidden" name="accName" th:value="${summoner.getAccName()}"/>
@@ -55,12 +56,18 @@
 						    <input type="hidden"  name="oldestGameUnixTime" th:value="${summoner.getMatchHistory().get(summoner.getMatchHistory().size() - 1).getGameEndTimestampUnix()}"/>
 						    <input type="submit" value="View"/>
 						</form>
+					
 					</div>
-			        <div id="nameDiv">  &nbsp; <b> [[${summoner.getAccName()}]] </b> <span id="hyphen"> -&nbsp;</span> </div>
-			        <div id="dateDiv">[[${summoner.getMatchHistory().get(0).getDate()}]] <span id="hyphen">-&nbsp;</span></div>
-			        <div id="dateDiv">[[${summoner.getMatchHistory().get(summoner.getMatchHistory().size() - 1).getDate()}]]<span id="hyphen">&nbsp; --- &nbsp;</span></div>
-			        <div id="gamesDiv">Games: [[${summoner.getMatchHistoryList().size()}]] <span id="hyphen">&nbsp; --- &nbsp;</span></div>
-			        <div id="gamemodeDiv">Most: [[${summoner.getRecentMatchSummary.getMostPlayedMode()}]] &nbsp; &nbsp;</div>
+					
+					
+			        <div id="nameDiv"><b> [[${summoner.getAccName()}]] </b>  </div>
+			        <div id="dateDiv">[[${summoner.getMatchHistory().get(0).getDate()}]] &nbsp;&nbsp;</div>
+			        <div id="dateDiv">[[${summoner.getMatchHistory().get(summoner.getMatchHistory().size() - 1).getDate()}]]&nbsp;&nbsp;</div>
+			        <div id="gamesDiv">Games: [[${summoner.getMatchHistoryList().size()}]] &nbsp;&nbsp;</div>
+			        <div id="gamemodeDiv">Most: [[${summoner.getRecentMatchSummary.getMostPlayedMode()}]]</div>
+			        
+			        
+			        
 			        <div id="deleteText"> 
 						<form method="post" th:action="@{/deleteSummoner}">
 							<input type="hidden" name="accName" th:value="${summoner.getAccName()}"/>
@@ -69,6 +76,7 @@
 						    <input type="submit" value="Delete"/>
 						</form>
 					</div>
+				 </div>
 			    </div>
 			    
 			   

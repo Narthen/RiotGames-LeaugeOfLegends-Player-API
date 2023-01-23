@@ -24,32 +24,7 @@
     </div>
     <div id="textarea">
     
-        <div id="disclaimer">
-        
-            <div class="dropdown-container-Disclaimer">
-              <!-- HTML for the dropdown button -->
-                <div id="disclaimerButtonDiv"> 
-                    <button class="dropdown-button" id="toggleDisclaimerButton"> ^ </button>
-                     &nbsp; *Notice* - GitHub/New Users  
-                </div>
-                <!-- HTML for the dropdown content -->
-                <div class="dropdown-content-Disclaimer" id="disclaimerContent">
-                
-                    <div class="disclaimerContent" >
-                     	If you downloaded my project off of GitHub, you will need to add your own api key for the project to work. <br>
-                     	<b>Getting your API Key:</b> you can generate your own api key by going to this link - <a id="riotLink" href="https://developer.riotgames.com" target="_blank">https://developer.riotgames.com</a>
-                     	<br><br>  <b>On Eclipse: </b> Right click > New > File > Name: '.env' <br>
-						In the env file you will put your api key in this format. 'API_KEY=<i>yourkey</i>' 
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Example: API_KEY=DFSGHJK-SDFGJKDFS-dgdfhgdh13
-						<br>
-						<br> <span id="JibberJabberNotice"><i>This project (LoL-Player-API) was created under Riot Games' "Legal Jibber Jabber" policy using assets owned by Riot Games.  
-						     <br> Riot Games does not endorse or sponsor this project.</i> </span>
-					</div>
-                    
-                    
-                </div>
-            </div>
-        </div>     
+            
         
         <div id="topSection" class="container">
             
@@ -60,18 +35,18 @@
             </div>
            
             <div id="rankIcon" class="column" >
-                <img id="rankImg" th:src="'/rankImages/'+ ${summoner.getSoloRankTier() +'.png'}" alt="RankIcon">
+                <img id="rankImg" th:src="'/rankImages/'+ ${summoner.getSoloRank().getTier() +'.png'}" alt="RankIcon">
             </div>
            
             <div id="rank" class="column" >
                 
                 <div id="rankText">
                   <b>
-                    <span id="rankTextMode" th:text="${summoner.getSoloRankQueueType() + ':'}"></span> <br>
-                    <span th:text="${summoner.getSoloRankTier() + ' ' + summoner.getSoloRankRank()}"></span> <br>
-                    <span th:text="'LP: ' + ${summoner.getSoloRankLeaguePoints() + 'lp'}"> </span><br> <br>
-                    <span id="wins" th:text="${summoner.getSoloRankWins() + ' W'}"></span> - <span id="losses" th:text="${summoner.getSoloRankLosses() + ' L'}"></span> <br>
-                    <span id="winPer" th:text="'Win %: ' + ${summoner.getSoloRankWinRate() + '%'}"></span>
+                    <span id="rankTextMode" th:text="${summoner.getSoloRank().getQueueType() + ':'}"></span> <br>
+                    <span th:text="${summoner.getSoloRank().getTier() + ' ' + summoner.getSoloRank().getRank()}"></span> <br>
+                    <span th:text="'LP: ' + ${summoner.getSoloRank().getLeaguePoints() + 'lp'}"> </span><br> <br>
+                    <span id="wins" th:text="${summoner.getSoloRank().getWins() + ' W'}"></span> - <span id="losses" th:text="${summoner.getSoloRank().getLosses() + ' L'}"></span> <br>
+                    <span id="winPer" th:text="'Win %: ' + ${summoner.getSoloRank().getWinRate() + '%'}"></span>
                   </b>
                 </div>
                 
@@ -79,18 +54,18 @@
             
             <div id="flexIcon" class="column" >
                 
-                <img id="rankImg" th:src="'/rankImages/'+ ${summoner.getFlexRankTier() +'.png'}" alt="RankIcon">
+                <img id="rankImg" th:src="'/rankImages/'+ ${summoner.getFlexRank().getTier() +'.png'}" alt="RankIcon">
             </div>
            
             <div id="flex" class="column" >
                 
                 <div id="rankText">
                   <b>
-                    <span id="rankTextMode" th:text="${summoner.getFlexRankQueueType() + ':'}"></span> <br>
-                    <span th:text="${summoner.getFlexRankTier() + ' ' + summoner.getFlexRankRank()}"></span> <br>
-                    <span th:text="'LP: ' + ${summoner.getFlexRankLeaguePoints() + 'lp'}"> </span><br> <br>
-                    <span id="wins" th:text="${summoner.getFlexRankWins() + ' W'}"></span> - <span id="losses" th:text="${summoner.getFlexRankLosses() + ' L'}"></span> <br>
-                    <span id="winPer" th:text="'Win %: ' + ${summoner.getFlexRankWinRate() + '%'}"></span>
+                    <span id="rankTextMode" th:text="${summoner.getFlexRank().getQueueType() + ':'}"></span> <br>
+                    <span th:text="${summoner.getFlexRank().getTier() + ' ' + summoner.getFlexRank().getRank()}"></span> <br>
+                    <span th:text="'LP: ' + ${summoner.getFlexRank().getLeaguePoints() + 'lp'}"> </span><br> <br>
+                    <span id="wins" th:text="${summoner.getFlexRank().getWins() + ' W'}"></span> - <span id="losses" th:text="${summoner.getFlexRank().getLosses() + ' L'}"></span> <br>
+                    <span id="winPer" th:text="'Win %: ' + ${summoner.getFlexRank().getWinRate() + '%'}"></span>
                   </b>
                 </div>
                 

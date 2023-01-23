@@ -19,11 +19,11 @@
         
     }
     #textarea {
-        height: 100%; 
+        height: 70%; 
         margin-left: auto;
         margin-right: auto;
         min-width: 500px;
-        max-width: 40%;
+        max-width: 45%;
         transform: scale(1.0);
         
         background-color: rgb(94 190 255);
@@ -43,7 +43,7 @@
     }
     
     #back-button {
-    	width: 100px; /* increase the width of the form */
+    	width: 70px; /* increase the width of the form */
 	    height: 26px; /* increase the height of the form */
 	    background-color: rgb(0, 0, 56);
 	    font-size: 18px; /* increase the font-size of the text */
@@ -88,7 +88,7 @@
     }
     #summonerInfo {
     	padding-top: 2px;
-    	padding-bottom: 4px;
+    	padding-bottom: 2px;
     	display: flex;
     	align-items: center;
     	text-align: center; 
@@ -100,10 +100,18 @@
     }
     
     
-    #viewText {
+    
+    
+    #accInfoContainer {
+    	width: 100%;
     	display: flex;
-	    position: absolute;
-    	left: 30px;
+    	justify-content: space-between; /* evenly space the divs */
+    }
+    
+    
+    #viewText {
+    	float: left;
+    	padding-left: 3px;
     }
     #viewText input[type="submit"] {
     	background-color: rgb(0, 0, 56);
@@ -112,9 +120,8 @@
 	}
 	
     #deleteText {
-    	display: flex;
-	    position: absolute;
-    	right: 30px;
+    	float: right;
+    	padding-right: 3px;
     }
      #deleteText input[type="submit"] {
     	background-color: rgb(0, 0, 56);
@@ -123,19 +130,31 @@
 	}
     
     #nameDiv {
+    	padding-left: 5px;
     	color: rgb(38, 74, 255);
+    	float: left; /* align to the left */
+    	text-align: left;
+    	width: 26%;
     }
     
      #dateDiv {
     	color: rgb(115, 115, 115);
+    	text-align: center; /* center align the text */
+    	width: 20%;
     }
     
      #gamesDiv {
     	color: rgb(29, 126, 255);
+    	text-align: center; /* center align the text */
+    	width: 17%;
     }
     
      #gamemodeDiv {
+     	padding-right: 5px;
     	color: rgb(29, 126, 255);
+    	float: right; 
+    	text-align: right;
+    	width: 17%;
     }
     
     #hyphen {

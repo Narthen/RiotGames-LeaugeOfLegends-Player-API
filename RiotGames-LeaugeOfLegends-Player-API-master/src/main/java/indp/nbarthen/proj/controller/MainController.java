@@ -50,29 +50,19 @@ public class MainController {
 	 @RequestMapping({"/"})
 	    public String homePage(Model model) throws JsonMappingException, JsonProcessingException {
 		 	
-		 	PlayerAcc summoner = new PlayerAcc();
 		 	String popupError = "none";
-		 	//Gets patch info from API + sets Icon URL
-		 	summoner = GetCurrentPatch.currentPatch(summoner);
 		 	
 		 	//If user was redirected after Summoner Search. Show popup error on webpage
 		 	if(getFetchInitialSummonerApiError().contains("Error")) {
 		 		popupError = getFetchInitialSummonerApiError();
 		 		setFetchInitialSummonerApiError("none");
-		 		model.addAttribute("summoner", summoner);
 		 		model.addAttribute("popupError", popupError);
-			 	model.addAttribute("prevURL", getPreviousURL()); //	REMOVE
-		 		summoner.setApiError(""); //REMOVE
-		 		setCurrSummoner(summoner); //REMOVE
-		 		return "homePage";
+		 		return "searchPage";
 		 	}
 		 	
-		 	setPreviousURL("/"); //REMOVE
-		 	model.addAttribute("summoner", summoner);
 		 	model.addAttribute("popupError", popupError);
-		 	model.addAttribute("prevURL", getPreviousURL()); //REMOVE
 		 	
-	        return "homePage";
+	        return "searchPage";
 	    }
 	 
 	 @RequestMapping({"summoner/{summonerName}"})
@@ -192,9 +182,10 @@ public class MainController {
 	 	
 	 //Add summoner to local database (Stored-Summoners.json file)
 	 @RequestMapping({"/saveSummoner"})
-	 	public String addSummoner(Model model) {
-			 PlayerAcc summoner = getCurrSummoner();
-			 if(summoner.getAccId() != null && !summoner.getMatchHistoryList().isEmpty()) {
+	 	public String addSummoner(@RequestParam(value = "summRandomId") String summUniqueId, Model model) {
+		 	 PlayerAcc summoner = playerRepository.findById(summUniqueId).get();
+		 	 
+		 	 if(summoner.getAccId() != null && !summoner.getMatchHistoryList().isEmpty()) {
 				 StoreSummoner.storeSummonerToFile(summoner);
 			 }
 			 return "redirect:/storedSummoners";
