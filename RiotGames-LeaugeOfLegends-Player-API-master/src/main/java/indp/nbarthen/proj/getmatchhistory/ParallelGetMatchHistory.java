@@ -1,4 +1,4 @@
-package indp.nbarthen.proj.apicontrolls;
+package indp.nbarthen.proj.getmatchhistory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ import java.net.URL;
 
 public class ParallelGetMatchHistory {
 	//Will go through every game in gameIds array. This is done in parallel to decrease load times. 
-	public static PlayerAcc parallellMatchHistory(PlayerAcc summoner, Vector<String> gameIds, boolean loadMore) throws JsonMappingException, JsonProcessingException {
+	public static PlayerAcc parallellMatchHistory(PlayerAcc summoner, Vector<String> gameIds, boolean loadMore, String matchType) throws JsonMappingException, JsonProcessingException {
 		PlayerAcc unchangedSummoner = summoner;
 		try {
 			
@@ -76,7 +76,7 @@ public class ParallelGetMatchHistory {
 			    JsonNode gameRoot = matchHistGameMapper.readTree(matchHistGameResponse);
 				
 			    
-			    
+			   
 				//Set values for LoLMatch from API's Json 
 				LoLMatch match = new LoLMatch();
 				
@@ -128,7 +128,13 @@ public class ParallelGetMatchHistory {
 				   participant.setMapSide(player.get("teamId").asText());
 				   participant.setChampionId(player.get("championId").asInt());
 				   participant.setChampionName(player.get("championName").asText());
-				   participant.setChampionUrl("http://ddragon.leagueoflegends.com/cdn/"+ summoner.getCurrPatch() +"/img/champion/"+ player.get("championName").asText() +".png");
+				   if(player.get("championName").asText().equals("FiddleSticks")) {
+					   participant.setChampionUrl("http://ddragon.leagueoflegends.com/cdn/"+ summoner.getCurrPatch() +"/img/champion/"+ "Fiddlesticks" +".png");
+				   }
+				   else {
+					   participant.setChampionUrl("http://ddragon.leagueoflegends.com/cdn/"+ summoner.getCurrPatch() +"/img/champion/"+ player.get("championName").asText() +".png");
+				   }
+				   
 				   participant.setKills(player.get("kills").asInt());
 				   participant.setDeaths(player.get("deaths").asInt());
 				   participant.setAssists(player.get("assists").asInt());
@@ -159,8 +165,23 @@ public class ParallelGetMatchHistory {
 			//Iterate through the list of futures and get the result of each task (result = each match)
 			for (Future<LoLMatch> future : futures) {
 			    LoLMatch result = future.get();
+				
+			    //If game was a remake, do not add (Victory / Defeat is not set)
+			    if(result.getWinLoss() == null) {
+			    	continue;
+			    }
+				    //Check if current result (match) queueId is correct. If  it is add to matches.
+				    	//Fixes bug where riot's API occasionally returns games of the incorrect queue type 
+			    if(!matchType.contains("All")) {
+				    if(  GetMatchTypeId.getId(matchType).equals( Integer.toString(result.getQueueId()) )  ) {
+				    		matches.add(result);
+				    }
+			    } 
+				else {
+				    matches.add(result);
+				}
 			    
-			    matches.add(result);
+			    
 			}
 
 			//Shut down the executor

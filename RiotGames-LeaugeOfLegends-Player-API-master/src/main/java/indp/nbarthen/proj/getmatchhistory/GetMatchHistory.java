@@ -1,4 +1,4 @@
-package indp.nbarthen.proj.apicontrolls;
+package indp.nbarthen.proj.getmatchhistory;
 
 import java.util.Vector;
 
@@ -53,7 +53,7 @@ public class GetMatchHistory {
 			}
 			//Select only a certain queue type.
 			else {
-				matchHistListUrl = "https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/" + summoner.getPuuid() + "/ids?queue="+GetMatchTypeId.getId(matchType)+"&start="+ start + "&count="+ end +"&api_key=" + apiKey;
+				matchHistListUrl = "https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/" + summoner.getPuuid() + "/ids?queue="+GetMatchTypeId.getId(summoner.getMatchType())+"&start="+ start + "&count="+ end +"&api_key=" + apiKey;
 			}
 			RestTemplate  matchHistRestTemplate = new RestTemplate();
 			String matchHistResponse = matchHistRestTemplate.getForObject(matchHistListUrl, String.class);
@@ -78,7 +78,7 @@ public class GetMatchHistory {
 				summoner.setMatchHistoryList(gameIds);
 			}
 			
-			return ParallelGetMatchHistory.parallellMatchHistory(summoner, gameIds, loadMore);
+			return ParallelGetMatchHistory.parallellMatchHistory(summoner, gameIds, loadMore, summoner.getMatchType());
 			
 		} catch (Exception e) {
 			//Catch possible API request errors + reasons.

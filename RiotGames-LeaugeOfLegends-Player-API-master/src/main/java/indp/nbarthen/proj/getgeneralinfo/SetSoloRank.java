@@ -1,4 +1,4 @@
-package indp.nbarthen.proj.apicontrolls;
+package indp.nbarthen.proj.getgeneralinfo;
 
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;

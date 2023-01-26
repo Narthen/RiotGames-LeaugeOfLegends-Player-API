@@ -196,9 +196,19 @@
 	    color: rgb(255, 255, 102);;
 	}
     
+    #socialLinks {
+    	position: relative;
+		float: right;
+		padding-top: 30px;
+		padding-right: 3px;
+		padding-bottom: 3px;
+		color: blue;
+		text-align: right;
+	}
     
-    
-    
-    
+    #bottomBorder {
+    	position: relative;
+		padding-bottom: 50px;    
+    }
     
     
