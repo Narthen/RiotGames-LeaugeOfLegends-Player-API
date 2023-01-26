@@ -181,7 +181,7 @@
             	
             </div>
             <div id="recentGamesTotal">
-            	Total Games: [[${summoner.getMatchHistoryList().size()}]]
+            	Total Games: <span th:text="${summoner.getRecentMatchSummary().getWins() + summoner.getRecentMatchSummary().getLosses()}"></span>
             </div>
             <div id="dropdown-button-Controller-Div">
                 <button class="dropdown-button-Controller-Collapse"> Collapse </button>
@@ -198,7 +198,7 @@
             
                 <div class="matchHistorygame-ButtonDivClass" id="matchHistorygame-ButtonDiv"> 
                     <button class="dropdown-button-matchHistorygame"> ^ </button>
-                      &nbsp;[[${iterStat.index + 1}]] - [[${match.getQueueName()}]] &nbsp; - &nbsp; [[${match.getGameEndTimestamp()}]] &nbsp;&nbsp; [[${match.getWinLoss()}]]
+                      <span id="matchHistoryGame-Label-Index">&nbsp;[[${iterStat.index + 1}]] - &nbsp;</span> <span id="matchHistoryGame-Label-Queue">[[${match.getQueueName()}]] </span> <span id="matchHistoryGame-Label-Date">[[${match.getGameEndTimestamp()}]] </span> <span id="matchHistoryGame-Label-IsWin">[[${match.getWinLoss()}]] </span>
                 </div>
                
                 <div class="dropdown-content-matchHistorygame" hidden>
@@ -240,24 +240,31 @@
                 </div>
             </div>
        
-            
+           <div id="socialLinks">
+	       		<b> <a href="https://www.linkedin.com/in/nathan-barthen-22993722a/" target="_blank">LinkedIn</a> <br>
+	       		<a href="https://github.com/Nathan-Barthen" target="_blank">GitHub</a> </b>
+	    	</div> 
         </div>
-        	
-			<script src="/disclaimerDropdown.js"></script>
-			<script src="/getSummonerPageURL.js"></script>
-        	<script src="/invalidSummonerPopup.js"></script>
-        	<script src="/mostPlayedChampions.js"></script>
+        
+        <div id="bottomBorder"></div>
+       
+        
+			<script src="/javascriptFiles/disclaimerDropdown.js"></script>
+			<script src="/javascriptFiles/getSummonerPageURL.js"></script>
+        	<script src="/javascriptFiles/invalidSummonerPopup.js"></script>
+        	<script src="/javascriptFiles/mostPlayedChampions.js"></script>
       
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
             <script>
               import doughnutlabel from "chartjs-plugin-doughnutlabel";
               Chart.plugins.register(doughnutlabel);
             </script>
-            <script src="/winLossChart.js"></script>
+            <script src="/javascriptFiles/winLossChart.js"></script>
   			
-  			<script src="/matchHistory.js"></script>
-        	<script src="/checkNameAndSubmit.js"></script>
-    </div>    
+  			<script src="/javascriptFiles/matchHistory.js"></script>
+        	<script src="/javascriptFiles/checkNameAndSubmit.js"></script>
+    </div> 
+   
     
 
 </body>

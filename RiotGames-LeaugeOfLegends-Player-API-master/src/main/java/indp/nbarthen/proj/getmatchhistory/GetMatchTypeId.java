@@ -1,4 +1,4 @@
-package indp.nbarthen.proj.apicontrolls;
+package indp.nbarthen.proj.getmatchhistory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;

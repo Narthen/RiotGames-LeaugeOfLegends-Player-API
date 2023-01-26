@@ -8,7 +8,7 @@
       min-width: 500px;  
       display: flex;  
       padding-top: 5px;
-      padding-bottom: 100px;
+      padding-bottom: 0px;
       padding-left: 10px;
       font-family: Trebuchet MS;
       border-left: 5px solid black;
@@ -54,9 +54,10 @@
          display: flex;
          align-items: center;
          font-family: Trebuchet MS;
-         color: rgb(0, 38, 153);
+         color: rgb(0, 0, 255);
          font-size: 15pt;
          border-bottom: 1px solid black;
+         width: 100%;
     }
     .dropdown-content-matchHistorygame {
       position: relative; 
@@ -73,9 +74,38 @@
       font-family: Trebuchet MS;
     }
     
+     #matchHistoryGame-Label-Index {
+    	float: left;
+    	padding-left: 3px;
+    	width: 5%;
+    	color: black;
+    }
+    #matchHistoryGame-Label-Queue {
+    	text-align: left;
+    	width: 15%;
+    }
+    
+     #matchHistoryGame-Label-Date {
+    	text-align: center; /* center align the text */
+    	width: 20%;
+    }
+     #IsWin {
+    	float: right;
+    	padding-right: 3px;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     #matchHistorygame-Summoner {
-        padding-left: 25px;
-        padding-right: 25px;
+        padding-left: 20px;
+        padding-right: 20px;
         width: 100px;
         height: 145px;
         max-width: 100px;
@@ -91,7 +121,7 @@
     }
     #matchHistorygame-SummonerStats {
         padding-left: 0px;
-        padding-right: 0px;
+        padding-right: 5px;
         padding-top: 10px;
         width: 170px;
         height: 145px;
@@ -104,6 +134,7 @@
         justify-content: center; 
         font-size: 25px;
         white-space: nowrap;
+        
     }
     
     #matchHistorygameSummonerChampionImage {
@@ -151,12 +182,14 @@
         float: right;
     }
     #matchHistorygame-PlayersInGame-Team1 {
+    	
         display: inline-block;
         line-height: 24px;
         padding-right: 10px;
         text-align: left;
         border-right: 3px solid black;
-          grid-area: team1;
+        border-left: 3px solid black;
+        grid-area: team1;
         padding-left: 10px;
         
     }

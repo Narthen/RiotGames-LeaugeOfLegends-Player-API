@@ -1,10 +1,17 @@
 package indp.nbarthen.proj.controller;
 
 
-import indp.nbarthen.proj.apicontrolls.*;
+import indp.nbarthen.proj.calculations.CalcRecentChampionInfo;
+import indp.nbarthen.proj.calculations.CalcRecentMatchInfo;
+import indp.nbarthen.proj.getgeneralinfo.GetCurrentPatch;
+import indp.nbarthen.proj.getgeneralinfo.GetRankInfo;
+import indp.nbarthen.proj.getgeneralinfo.RetrieveAccountGenericInfo;
+import indp.nbarthen.proj.getmatchhistory.*;
 import indp.nbarthen.proj.repository.LoLMatch;
 import indp.nbarthen.proj.repository.PlayerAcc;
 import indp.nbarthen.proj.repository.PlayerRepository;
+import indp.nbarthen.proj.storedinfo.GetStoredSummoners;
+import indp.nbarthen.proj.storedinfo.StoreSummoner;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.io.IOException;
@@ -32,17 +39,11 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 @Controller
 public class MainController {
 	private PlayerRepository playerRepository;
-	private String previousURL;
-	private PlayerAcc currSummoner;
-	private String currMatchType;
 	private String fetchInitialSummonerApiError;
 	private String fetchSummError;
 	
 	public MainController(PlayerRepository playerRepository) {
 		this.playerRepository = playerRepository;
-		previousURL = "/";
-		currSummoner = new PlayerAcc();
-		currMatchType = "All";
 		fetchInitialSummonerApiError = "none";
 		fetchSummError = "none";
 	}
@@ -102,21 +103,12 @@ public class MainController {
 		 		//If API does not return all information for a existing summoner - redirect to previous page + show popup
 			 	if(summoner.getApiError().contains("Error")) {
 			 		playerRepository.save(summoner);
-			 		String urlOptionalParameters = request.getQueryString();
-			 		int index = urlOptionalParameters.indexOf("matchType=");
-			 		if(index != -1) {
-			 		    int endIndex = urlOptionalParameters.indexOf("&", index);
-			 		    if(endIndex == -1) {
-			 		        endIndex = urlOptionalParameters.length();
-			 		    }
-			 		   urlOptionalParameters = urlOptionalParameters.substring(0, index) + "matchType=" + summoner.getMatchType() + urlOptionalParameters.substring(endIndex);
-			 		}
-			 		String url = request.getRequestURL().toString() + "?" + urlOptionalParameters;
-			 		System.out.println("my url for redirect: " + url);
-			 		return "redirect:" + url;
+			 		return "redirect:" + RedirectUrl.getRedirectUrl(request, summoner);
 			 	}
 			 	summoner.setMatchType(matchType);
 		 	}
+		 	
+		 	
 		 	//If request is a completely new summoner
 		 	else {
 		 		if(matchType != null) {
@@ -151,10 +143,6 @@ public class MainController {
 		 	playerRepository.save(summoner);
 		 	
 		 	model.addAttribute("summoner", summoner);
-		 
-		 	
-		 	setPreviousURL("/summoner/" + summoner.getAccName());
-		 	
 		 	
 	        return "homePage";
 	    }
@@ -171,10 +159,10 @@ public class MainController {
 		 		setFetchSummError("none");
 		 		model.addAttribute("popupError", errorPopup);
 		 	}
-		 	
+		 	//Alphabetically A-Z
+		 	Collections.sort(allStoredAccs, (acc1, acc2) -> acc1.getAccName().compareTo(acc2.getAccName()));
 		 	model.addAttribute("allSummoners", allStoredAccs);
 		 
-		 	setPreviousURL("/storedSummoners");
 		    return "storedSummoners";
 	}
 	 
@@ -210,9 +198,6 @@ public class MainController {
 				}
 			 	
 			 	
-			 	setPreviousURL("/storedSummoners");
-			 	
-			 	model.addAttribute("prevURL", getPreviousURL());
 			 	model.addAttribute("summoner", storedSummoner);
 			 	
 				return "storedSummoner";
@@ -223,30 +208,7 @@ public class MainController {
 	 
 	 
 
-	public String getPreviousURL() {
-		return previousURL;
-	}
-
-	public void setPreviousURL(String previousURL) {
-		this.previousURL = previousURL;
-	}
-
-	public PlayerAcc getCurrSummoner() {
-		return currSummoner;
-	}
-
-	public void setCurrSummoner(PlayerAcc currSummoner) {
-		this.currSummoner = currSummoner;
-	}
-
-	public String getCurrMatchType() {
-		return currMatchType;
-	}
-
-	public void setCurrMatchType(String currMatchType) {
-		this.currMatchType = currMatchType;
-	}
-
+	
 	public String getFetchInitialSummonerApiError() {
 		return fetchInitialSummonerApiError;
 	}

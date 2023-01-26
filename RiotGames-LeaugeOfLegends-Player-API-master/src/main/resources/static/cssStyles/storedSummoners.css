@@ -156,10 +156,15 @@
     	text-align: right;
     	width: 17%;
     }
+  
     
-    #hyphen {
-    	color: black;
-    }
-    
-    
+    #socialLinks {
+		position: absolute;
+		height: 70%; 
+        width: 98.5%;
+		top: 94%;
+		color: blue;
+		text-align: right;
+		
+	}
     

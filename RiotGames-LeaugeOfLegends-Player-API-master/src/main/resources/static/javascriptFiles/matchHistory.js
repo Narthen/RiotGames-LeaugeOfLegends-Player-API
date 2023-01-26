@@ -65,7 +65,7 @@
                     dropdownContainer.style.backgroundColor = 'rgb(102, 255, 102)';
                   } else if (buttonDiv.textContent.includes('Defeat')) {
                     // otherwise, if it includes "Defeat", set the background-color to red
-                    dropdownContainer.style.backgroundColor = 'rgb(255, 77, 77)';
+                    dropdownContainer.style.backgroundColor = 'rgb(255, 153, 153)';
                   }
                 }
                 

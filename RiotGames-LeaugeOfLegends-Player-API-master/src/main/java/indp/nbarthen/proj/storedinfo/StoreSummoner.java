@@ -1,4 +1,4 @@
-package indp.nbarthen.proj.apicontrolls;
+package indp.nbarthen.proj.storedinfo;
 
 import java.io.IOException;
 import java.util.List;
