@@ -30,6 +30,7 @@ public class LoLMatch {
 	private String matchId;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Participant> participants; //uses PUUID
+	private String gameVersion;
 	private long gameDuration;
 	//Riot used Unix timestamp in MILISECONDS
 	private long gameEndTimestampUnix;
@@ -74,6 +75,23 @@ public class LoLMatch {
 		this.participants = participants;
 	}
 
+	public String getGameVersion() {
+		return gameVersion;
+	}
+
+	public void setGameVersion(String gameVersion) {
+		this.gameVersion = gameVersion;
+	}
+	
+	@JsonIgnore
+	public String getSeason() {
+		String tempGameVersion = gameVersion;
+		String[] parts = tempGameVersion.split("\\.");
+		String season = "Season " + parts[0];
+				
+		return season;		
+	}
+	
 	public long getGameDuration() {
 		return gameDuration;
 	}

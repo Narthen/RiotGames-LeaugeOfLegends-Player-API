@@ -75,11 +75,10 @@
                 
                 <div id="databaseAndSearch">
                     
-                    <div id="seeStored">
-                    	<form method="post" th:action="@{/storedSummoners}">
-                            <input type="submit" value="Stored Summoners" />
+                    <div id="goHome">
+                    	<form method="post" th:action="@{/}">
+                            <input type="submit" value="Home" />
                         </form>
-                    
                     </div>
                     
                     <div id="searchSumm">
@@ -98,6 +97,13 @@
                     </div>
                     
                  </div>
+                 
+                  <div id="seeStored">
+                    	<form method="post" th:action="@{/storedSummoners}">
+                            <input type="submit" value="Stored Summoners" />
+                        </form>
+                 </div>
+                    
                  <div id="saveSummoner">   
                         
                         <form method="post" th:action="@{/saveSummoner}">
@@ -189,12 +195,12 @@
             	<form id="changeMatchType" method="get" th:action="@{/summoner/__${summoner.getAccName()}__}">
             		<input type="hidden" th:name="summRandomId" th:value="${summoner.getUniqueId()}"/>
 	                <select id="matchHistSelect" th:name="matchType">
-	                  <option value="All">All</option>
-	                  <option value="Blind">Blind</option>
-	                  <option value="Draft">Draft</option>
-	                  <option value="Ranked">Ranked</option>
-	                  <option value="Flex">Flex</option>
-	                  <option value="ARAM">ARAM</option>
+	                  <option th:value="All">All</option>
+	                  <option th:value="Blind">Blind</option>
+	                  <option th:value="Draft">Draft</option>
+	                  <option th:value="Ranked">Ranked</option>
+	                  <option th:value="Flex">Flex</option>
+	                  <option th:value="ARAM">ARAM</option>
 	                </select>
 	        	</form>
             </div>
@@ -216,7 +222,11 @@
             
                 <div class="matchHistorygame-ButtonDivClass" id="matchHistorygame-ButtonDiv"> 
                     <button class="dropdown-button-matchHistorygame"> ^ </button>
-                      <span id="matchHistoryGame-Label-Index">&nbsp;[[${iterStat.index + 1}]] - &nbsp;</span> <span id="matchHistoryGame-Label-Queue">[[${match.getQueueName()}]] </span> <span id="matchHistoryGame-Label-Date">[[${match.getGameEndTimestamp()}]] </span> <span id="matchHistoryGame-Label-IsWin">[[${match.getWinLoss()}]] </span>
+                      <span id="matchHistoryGame-Label-Index">&nbsp;[[${iterStat.index + 1}]] - &nbsp;</span> 
+                      <span id="matchHistoryGame-Label-Queue">[[${match.getQueueName()}]] </span> 
+                      <span id="matchHistoryGame-Label-Date">[[${match.getGameEndTimestamp()}]] </span> 
+                      <span id="matchHistoryGame-Label-IsWin">[[${match.getWinLoss()}]] </span>
+                      <span id="matchHistoryGame-Label-Season"> <i> [[${match.getSeason()}]] </i> </span>
                 </div>
                
                 <div class="dropdown-content-matchHistorygame" hidden>

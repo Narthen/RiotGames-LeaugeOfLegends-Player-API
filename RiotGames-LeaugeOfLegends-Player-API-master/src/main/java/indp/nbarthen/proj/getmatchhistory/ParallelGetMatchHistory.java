@@ -83,7 +83,7 @@ public class ParallelGetMatchHistory {
 				//Stores the generic information about the match.
 				match.setMatchId(gameRoot.path("metadata").path("matchId").asText());
 				match.setGameDuration(gameRoot.path("info").path("gameDuration").asLong());
-				
+				match.setGameVersion(gameRoot.path("info").path("gameVersion").asText());
 				
 				
 				
@@ -104,7 +104,7 @@ public class ParallelGetMatchHistory {
 				//Loops through all 10 participants (summoners) in the Riot API. Sets needed values.
 				for (JsonNode player : players) {
 					//If current participant is the main summoner (save additional information).
-				    if( player.get("summonerName").asText().contains( summoner.getAccName()) ) {
+				    if( player.get("summonerName").asText().contains( summoner.getAccName()) || player.get("puuid").asText().contains( summoner.getPuuid()) ) {
 				    	match.setSummonerAccName(player.get("summonerName").asText());
 				    	match.setSummonerChampionId(player.get("championId").asInt());
 				    	match.setSummonerChampionName(player.get("championName").asText());
@@ -168,10 +168,14 @@ public class ParallelGetMatchHistory {
 				
 			    //If game was a remake, do not add (Victory / Defeat is not set)
 			    if(result.getWinLoss() == null) {
+			    	System.out.println("Skipped matched - it is remake");
+			    	System.out.println("Match id- " + result.getMatchId());
+			    	System.out.println();
 			    	continue;
 			    }
-				    //Check if current result (match) queueId is correct. If  it is add to matches.
-				    	//Fixes bug where riot's API occasionally returns games of the incorrect queue type 
+			    
+				//Check if current result (match) queueId is correct. If  it is add to matches.
+				    //Fixes bug where riot's API occasionally returns games of the incorrect queue type (when searching for one specific queue type)
 			    if(!matchType.contains("All")) {
 				    if(  GetMatchTypeId.getId(matchType).equals( Integer.toString(result.getQueueId()) )  ) {
 				    		matches.add(result);

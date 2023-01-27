@@ -1,5 +1,5 @@
 /**
- * Used to control / create the doughnut chart for the recent game win loss.
+ * 
  */
 
 				document.getElementById("getSummoner").addEventListener("submit", function(event) {
