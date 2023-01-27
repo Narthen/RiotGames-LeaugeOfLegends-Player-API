@@ -52,6 +52,11 @@ public class GetMatchHistory {
 				matchHistListUrl = "https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/" + summoner.getPuuid() + "/ids?start="+ start + "&count="+ end +"&api_key=" + apiKey ;
 			}
 			//Select only a certain queue type.
+			//Loading 20 games
+			else if (!loadMore) {
+				matchHistListUrl = "https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/" + summoner.getPuuid() + "/ids?queue="+GetMatchTypeId.getId(matchType)+"&start="+ start + "&count="+ end +"&api_key=" + apiKey;
+			}
+			//loadMore = true; get 10 games
 			else {
 				matchHistListUrl = "https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/" + summoner.getPuuid() + "/ids?queue="+GetMatchTypeId.getId(summoner.getMatchType())+"&start="+ start + "&count="+ end +"&api_key=" + apiKey;
 			}

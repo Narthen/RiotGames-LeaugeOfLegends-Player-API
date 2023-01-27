@@ -63,7 +63,7 @@
 			        <div id="nameDiv"><b> [[${summoner.getAccName()}]] </b>  </div>
 			        <div id="dateDiv">[[${summoner.getMatchHistory().get(0).getDate()}]] &nbsp;&nbsp;</div>
 			        <div id="dateDiv">[[${summoner.getMatchHistory().get(summoner.getMatchHistory().size() - 1).getDate()}]]&nbsp;&nbsp;</div>
-			        <div id="gamesDiv">Games: [[${summoner.getMatchHistoryList().size()}]] &nbsp;&nbsp;</div>
+			        <div id="gamesDiv">Games: [[${summoner.getRecentMatchSummary().getWins() + summoner.getRecentMatchSummary().getLosses()}]] &nbsp;&nbsp;</div>
 			        <div id="gamemodeDiv">Most: [[${summoner.getRecentMatchSummary.getMostPlayedMode()}]]</div>
 			        
 			        

@@ -30,7 +30,6 @@ public class GetGameModeName {
 			for (JsonNode obj : gameModeRoot) {
 			    if (obj.get("queueId").asInt() == gamemodeId) {
 			        gamemode = obj.get("description").asText();
-			        
 			        //rename certain gamemode names to be shorter
 			        if(gamemode.contains("5v5 Draft Pick games")) {
 			        	gamemode = "Draft Pick";

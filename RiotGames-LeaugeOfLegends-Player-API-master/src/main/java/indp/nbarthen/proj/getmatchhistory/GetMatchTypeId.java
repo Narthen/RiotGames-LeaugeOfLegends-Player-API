@@ -8,6 +8,7 @@ import indp.nbarthen.proj.repository.PlayerAcc;
 public class GetMatchTypeId {
 	public static String getId(String matchType) {
 		//Use this link to check matchType ids if out-dated (https://static.developer.riotgames.com/docs/lol/queues.json)
+		
 		String matchTypeId = "420";
 		if(matchType.contains("Blind")) {
 			matchTypeId = "430";
